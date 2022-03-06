@@ -1,0 +1,26 @@
+package com.bentbase.backend.admin;
+
+import com.bentbase.backend.user.User;
+import lombok.*;
+
+import javax.persistence.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
+@Entity
+@Table (name = "admin")
+public class Admin {
+	
+	@Id
+	@Column (name = "userEmail", nullable = false)
+	private String userEmail;
+	
+	@OneToOne (optional = false, orphanRemoval = true)
+	@JoinColumn (name = "userEmail", nullable = false)
+	private User user;
+	
+//	roles
+}
