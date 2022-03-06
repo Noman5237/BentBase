@@ -4,7 +4,6 @@ const { faker } = require("@faker-js/faker");
 const SHA256 = require("crypto-js/sha256");
 const Base64 = require("crypto-js/enc-base64");
 
-const generateEmail = faker.internet.email;
 const generateFirstName = faker.name.firstName;
 const generateLastName = faker.name.lastName;
 const generateDOB = () => faker.date.between("1975-01-01", "2000-01-01");
