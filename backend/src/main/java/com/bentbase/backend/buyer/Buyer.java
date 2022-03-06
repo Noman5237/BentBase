@@ -15,11 +15,11 @@ import javax.persistence.*;
 public class Buyer {
 	
 	@Id
-	@Column (name = "userEmail", nullable = false)
+	@Column (nullable = false)
 	private String userEmail;
 	
 	@OneToOne (optional = false, orphanRemoval = true)
-	@JoinColumn (name = "userEmail", nullable = false)
+	@JoinColumn (name = "user_email", nullable = false)
 	private User user;
 	
 //	jobs

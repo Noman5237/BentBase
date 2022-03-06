@@ -14,20 +14,20 @@ import java.sql.Date;
 @Getter
 @Setter
 @Entity
-@Table (name = "user")
+@Table (name = "\"user\"")
 public class User {
 	
 	@Id
-	@Column (name = "email", nullable = false)
+	@Column (nullable = false)
 	private String email;
 	
-	@Column (name = "firstName")
+	@Column
 	private String firstName;
 	
-	@Column (name = "lastName")
+	@Column
 	private String lastName;
 	
-	@Column (name = "dob")
+	@Column
 	private Date dob;
 
 //	image
