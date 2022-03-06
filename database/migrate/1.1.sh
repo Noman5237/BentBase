@@ -1,0 +1,1 @@
+node script/faker-js/index.js --limit 1000000 --seed 1
