@@ -2,7 +2,7 @@
   "name": "faker-js-script",
   "version": "1.0",
   "description": "Faker JS script to generate random bulk data",
-	"main": "index.js",
+  "main": "index.js",
   "scripts": {},
   "keywords": [],
   "author": "Noman5237",
@@ -11,6 +11,7 @@
     "@faker-js/faker": "^6.0.0-alpha.7"
   },
   "dependencies": {
-    "commander": "^9.0.0"
+    "commander": "^9.0.0",
+    "crypto-js": "^4.1.1"
   }
 }

@@ -2,8 +2,9 @@
 const fs = require("fs");
 const { Command } = require("commander");
 const { user } = require("./src");
+const path = require("path");
 
-const packageOptions = JSON.parse(fs.readFileSync("package.json", "utf-8"));
+const packageOptions = JSON.parse(fs.readFileSync(path.join(__dirname, "package.json"), "utf-8"));
 
 const program = new Command();
 
