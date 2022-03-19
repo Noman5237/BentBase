@@ -1,8 +1,10 @@
 package com.bentbase.backend.user;
 
+import com.bentbase.backend.utils.SortUtil;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,8 +16,9 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
-	public List<User> getAllUsers() {
-		return userRepository.findAll();
+	public Page<User> getAllUsers(int page, int size, String[] sorts) {
+		PageRequest pagingSort = PageRequest.of(page, size, SortUtil.getOrdersFromStringArray(sorts));
+		return userRepository.findAll(pagingSort);
 	}
 	
 	public User getUserByEmail(String email) {
