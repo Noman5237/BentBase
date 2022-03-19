@@ -25,4 +25,16 @@ public class UserService {
 		Optional<User> user = userRepository.findByEmail(email);
 		return user.orElse(null);
 	}
+	
+	public User createUser(User user) {
+		return userRepository.save(user);
+	}
+	
+	public User updateUser(User user) {
+		return userRepository.save(user);
+	}
+	
+	public void deleteUserByEmail(String email) {
+		userRepository.deleteUserByEmail(email);
+	}
 }

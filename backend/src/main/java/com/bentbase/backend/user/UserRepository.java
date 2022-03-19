@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, String> {
+interface UserRepository extends JpaRepository<User, String> {
 	
 	@Override
 	Page<User> findAll(Pageable pageable);
 	
 	Optional<User> findByEmail(String email);
 	
+	void deleteUserByEmail(String email);
 }

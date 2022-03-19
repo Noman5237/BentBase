@@ -39,4 +39,18 @@ public class UserController {
 		return userService.getUserByEmail(email);
 	}
 	
+	@PostMapping ("/create")
+	public User createUser(@RequestBody User user) {
+		return userService.createUser(user);
+	}
+	
+	@PatchMapping ("/update/")
+	public User updateUser(@RequestBody User user) {
+		return userService.updateUser(user);
+	}
+	
+	@DeleteMapping ("/{email}")
+	public void deleteUserByEmail(@PathVariable ("email") String email) {
+		userService.deleteUserByEmail(email);
+	}
 }
