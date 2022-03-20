@@ -30,9 +30,14 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
+	@SneakyThrows
 	public Page<User> getAllUsers(int page, int size, String[] sorts) {
-		PageRequest pagingSort = PageRequest.of(page, size, SortUtil.getOrdersFromStringArray(sorts));
-		return userRepository.findAll(pagingSort);
+		try {
+			PageRequest pagingSort = PageRequest.of(page, size, SortUtil.getOrdersFromStringArray(sorts, User.class));
+			return userRepository.findAll(pagingSort);
+		} catch (RESTException exception) {
+			throw new UserGetException(exception);
+		}
 	}
 	
 	@SneakyThrows

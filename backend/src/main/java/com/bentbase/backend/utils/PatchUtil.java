@@ -18,11 +18,11 @@ public class PatchUtil {
 		var declaredFields = Arrays.stream(targetClass.getDeclaredFields())
 		                           .map(Field::getName)
 		                           .collect(Collectors.toSet());
-		final List<String> undefinedKeys = keys.stream()
-		                                       .filter(declaredFields::add)
-		                                       .collect(Collectors.toList());
-		if (undefinedKeys.size() > 0) {
-			throw new RESTException().withPayload("invalidAttributes", undefinedKeys);
+		final List<String> invalidAttributes = keys.stream()
+		                                           .filter(declaredFields::add)
+		                                           .collect(Collectors.toList());
+		if (invalidAttributes.size() > 0) {
+			throw new RESTException().withPayload("invalidAttributes", invalidAttributes);
 		}
 		
 		var source = new ObjectMapper().convertValue(properties, targetClass);

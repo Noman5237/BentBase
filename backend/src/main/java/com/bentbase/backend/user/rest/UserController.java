@@ -21,7 +21,7 @@ public class UserController {
 	public Map<String, Object> getAllUsers(
 			@RequestParam (defaultValue = "0") int page,
 			@RequestParam (defaultValue = "10") int size,
-			@RequestParam (defaultValue = "email,asc") String[] sorts) {
+			@RequestParam (required = false, defaultValue = "email,asc") String[] sorts) {
 		
 		Page<User> usersPage = userService.getAllUsers(page, size, sorts);
 		
