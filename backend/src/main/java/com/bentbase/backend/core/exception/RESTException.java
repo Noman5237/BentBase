@@ -2,13 +2,14 @@ package com.bentbase.backend.core.exception;
 
 import lombok.Getter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 @Getter
 public class RESTException extends Exception {
 	
-	private final List<String> errors = new ArrayList<>();
+	private final Map<String, String> errors = new HashMap<>();
+	private final Map<String, Object> payloads = new HashMap<>();
 	
 	public RESTException() {
 	}
@@ -29,8 +30,13 @@ public class RESTException extends Exception {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
 	
-	public RESTException withErrors(String... errors) {
-		this.errors.addAll(List.of(errors));
+	public RESTException withError(String key, String error) {
+		this.errors.put(key, error);
+		return this;
+	}
+	
+	public RESTException withPayload(String key, Object payload) {
+		this.payloads.put(key, payload);
 		return this;
 	}
 	

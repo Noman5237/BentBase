@@ -16,6 +16,7 @@ import java.sql.Date;
 @Builder
 @Getter
 @Setter
+@ToString
 @Entity
 @Table (name = "\"user\"")
 public class User {
@@ -37,6 +38,6 @@ public class User {
 	@Column
 	@NotNull
 	private Date dob;
-
-//	image
+	
+	//	image
 }

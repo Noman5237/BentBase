@@ -2,15 +2,15 @@ package com.bentbase.backend.utils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ConstraintViolationExceptionUtil {
 	
-	public static List<String> getViolations(ConstraintViolationException exception) {
+	public static Map<String, String> getViolations(ConstraintViolationException exception) {
 		return exception.getConstraintViolations()
 		                .stream()
-		                .map(violation -> String.format("%s: %s", violation.getPropertyPath(), violation.getMessage()))
-		                .collect(Collectors.toList());
+		                .collect(Collectors.toMap(violation -> violation.getPropertyPath()
+		                                                                .toString(), ConstraintViolation::getMessage));
 	}
 }

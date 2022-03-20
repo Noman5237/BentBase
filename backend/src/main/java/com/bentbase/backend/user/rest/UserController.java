@@ -46,8 +46,8 @@ public class UserController {
 	}
 	
 	@PatchMapping ("/update")
-	public User updateUser(@RequestBody User user) {
-		return userService.updateUser(user);
+	public User updateUser(@RequestBody Map<String, Object> properties) {
+		return userService.updateUser(properties);
 	}
 	
 	@DeleteMapping ("/{email}")

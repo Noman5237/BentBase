@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -14,6 +14,6 @@ import java.util.List;
 public class ExceptionResponse {
 	
 	private String message;
-	private List<String> errors;
+	private Map<String, String> errors;
 	
 }

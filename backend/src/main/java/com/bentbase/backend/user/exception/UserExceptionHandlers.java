@@ -2,6 +2,7 @@ package com.bentbase.backend.user.exception;
 
 import com.bentbase.backend.core.dto.ExceptionResponse;
 import com.bentbase.backend.core.exception.ExceptionHandlerFunctor;
+import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.utils.ConstraintViolationExceptionUtil;
 import lombok.Getter;
 import org.hibernate.id.IdentifierGenerationException;
@@ -13,11 +14,10 @@ import org.springframework.util.Assert;
 
 import javax.persistence.RollbackException;
 import javax.validation.ConstraintViolationException;
-import java.util.ArrayList;
 import java.util.List;
 
-public enum UserCreationExceptionHandlers {
-	CONSTRAINT_VIOLATION_EXCEPTION_HANDLER(exception -> {
+public enum UserExceptionHandlers {
+	NONEXISTENT_ID_EXCEPTION_HANDLER(exception -> {
 		try {
 			Assert.isTrue(exception.getCause() instanceof JpaSystemException, "");
 			Assert.isTrue(exception.getCause()
@@ -26,14 +26,14 @@ public enum UserCreationExceptionHandlers {
 			return null;
 		}
 		
-		var errors = new ArrayList<>(List.of("email: must not be blank"));
-		errors.addAll(exception.getErrors());
+		var errors = exception.getErrors();
+		errors.put("email", "must not be blank");
 		
 		var response = new ExceptionResponse(exception.getMessage(), errors);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}),
 	
-	NONEXISTENT_ID_EXCEPTION_HANDLER(exception -> {
+	CONSTRAINT_VIOLATION_EXCEPTION_HANDLER(exception -> {
 		try {
 			Assert.isTrue(exception.getCause() instanceof TransactionSystemException, "");
 			Assert.isTrue(exception.getCause()
@@ -48,20 +48,43 @@ public enum UserCreationExceptionHandlers {
 		var violations = ConstraintViolationExceptionUtil.getViolations((ConstraintViolationException) exception.getCause()
 		                                                                                                        .getCause()
 		                                                                                                        .getCause());
-		violations.addAll(exception.getErrors());
+		violations.putAll(exception.getErrors());
+		
 		var response = new ExceptionResponse(exception.getMessage(), violations);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}),
 	
+	INVALID_ATTRIBUTE_EXCEPTION_HANDLER(exception -> {
+		try {
+			Assert.isTrue(exception.getCause() instanceof RESTException, "");
+			Assert.isTrue(((RESTException) exception.getCause()).getPayloads()
+			                                                    .containsKey("invalidAttributes"), "");
+		} catch (Exception ignored) {
+			return null;
+		}
+		
+		//noinspection unchecked
+		List<String> invalidAttributes = (List<String>) ((RESTException) exception.getCause()).getPayloads()
+		                                                                                      .get("invalidAttributes");
+		var errors = exception.getErrors();
+		invalidAttributes.forEach(attribute -> errors.put(attribute, "invalid attribute"));
+		
+		var response = new ExceptionResponse(exception.getMessage(), errors);
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}),
+	
 	DEFAULT_EXCEPTION_HANDLER(exception -> {
-		var response = new ExceptionResponse(exception.getMessage(), exception.getErrors());
+		var errors = exception.getErrors()
+		                      .size() > 0 ? exception.getErrors() : null;
+		
+		var response = new ExceptionResponse(exception.getMessage(), errors);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	});
 	
 	@Getter
 	private final ExceptionHandlerFunctor exceptionHandler;
 	
-	UserCreationExceptionHandlers(ExceptionHandlerFunctor exceptionHandler) {
+	UserExceptionHandlers(ExceptionHandlerFunctor exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
 	}
 }

@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.util.Arrays;
 
 @ControllerAdvice
-public class UserCreationControllerAdvice extends ExceptionControllerAdvice {
+public class UserControllerAdvice extends ExceptionControllerAdvice {
 	
-	public UserCreationControllerAdvice() {
-		Arrays.asList(UserCreationExceptionHandlers.values())
+	public UserControllerAdvice() {
+		Arrays.asList(UserExceptionHandlers.values())
 		      .forEach(handler -> super.handlers.add(handler.getExceptionHandler()));
 	}
 	
 	@Override
-	@ExceptionHandler (UserCreationException.class)
+	@ExceptionHandler ({UserGetException.class, UserCreateException.class, UserUpdateException.class})
 	public ResponseEntity<ExceptionResponse> handle(RESTException exception) {
 		return super.handle(exception);
 	}
