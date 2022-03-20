@@ -1,9 +1,13 @@
-package com.bentbase.backend.user;
+package com.bentbase.backend.user.rest;
 
+import com.bentbase.backend.user.exception.UserCreationException;
 import com.bentbase.backend.utils.SortUtil;
+import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Optional;
 
@@ -26,8 +30,17 @@ public class UserService {
 		return user.orElse(null);
 	}
 	
+	@SneakyThrows
 	public User createUser(User user) {
-		return userRepository.save(user);
+		Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+		if (existingUser.isPresent()) {
+//			throw new UserCreationException()
+		}
+		try {
+			return userRepository.save(user);
+		} catch (TransactionSystemException | JpaSystemException exception) {
+			throw new UserCreationException(exception);
+		}
 	}
 	
 	public User updateUser(User user) {

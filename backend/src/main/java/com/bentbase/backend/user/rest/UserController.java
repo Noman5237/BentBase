@@ -1,4 +1,4 @@
-package com.bentbase.backend.user;
+package com.bentbase.backend.user.rest;
 
 import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
@@ -18,9 +18,10 @@ public class UserController {
 	}
 	
 	@GetMapping ()
-	public Map<String, Object> getAllUsers(@RequestParam (defaultValue = "0") int page,
-	                                       @RequestParam (defaultValue = "10") int size,
-	                                       @RequestParam (defaultValue = "email,asc") String[] sorts) {
+	public Map<String, Object> getAllUsers(
+			@RequestParam (defaultValue = "0") int page,
+			@RequestParam (defaultValue = "10") int size,
+			@RequestParam (defaultValue = "email,asc") String[] sorts) {
 		
 		Page<User> usersPage = userService.getAllUsers(page, size, sorts);
 		
@@ -44,13 +45,14 @@ public class UserController {
 		return userService.createUser(user);
 	}
 	
-	@PatchMapping ("/update/")
+	@PatchMapping ("/update")
 	public User updateUser(@RequestBody User user) {
 		return userService.updateUser(user);
 	}
 	
 	@DeleteMapping ("/{email}")
-	public void deleteUserByEmail(@PathVariable ("email") String email) {
+	public String deleteUserByEmail(@PathVariable ("email") String email) {
 		userService.deleteUserByEmail(email);
+		return String.format("user with email: `%s` is deleted", email);
 	}
 }

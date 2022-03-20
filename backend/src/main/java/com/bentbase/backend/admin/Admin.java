@@ -1,6 +1,6 @@
 package com.bentbase.backend.admin;
 
-import com.bentbase.backend.user.User;
+import com.bentbase.backend.user.rest.User;
 import lombok.*;
 
 import javax.persistence.*;
