@@ -7,9 +7,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
+public class RESTExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 	
-	protected final List<ExceptionHandlerFunctor> handlers = new ArrayList<>();
+	protected final List<RESTExceptionHandlerFunctor> handlers = new ArrayList<>();
 	
 	public ResponseEntity<ExceptionResponse> handle(RESTException exception) {
 		ResponseEntity<ExceptionResponse> response;

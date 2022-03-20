@@ -1,7 +1,7 @@
 package com.bentbase.backend.user.exception;
 
 import com.bentbase.backend.core.dto.ExceptionResponse;
-import com.bentbase.backend.core.exception.ExceptionHandlerFunctor;
+import com.bentbase.backend.core.exception.RESTExceptionHandlerFunctor;
 import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.utils.ConstraintViolationExceptionUtil;
 import lombok.Getter;
@@ -82,9 +82,9 @@ public enum UserExceptionHandlers {
 	});
 	
 	@Getter
-	private final ExceptionHandlerFunctor exceptionHandler;
+	private final RESTExceptionHandlerFunctor exceptionHandler;
 	
-	UserExceptionHandlers(ExceptionHandlerFunctor exceptionHandler) {
+	UserExceptionHandlers(RESTExceptionHandlerFunctor exceptionHandler) {
 		this.exceptionHandler = exceptionHandler;
 	}
 }
