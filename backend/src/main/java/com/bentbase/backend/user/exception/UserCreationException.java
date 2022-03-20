@@ -1,6 +1,11 @@
 package com.bentbase.backend.user.exception;
 
-public class UserCreationException extends Exception {
+import com.bentbase.backend.core.exception.RESTException;
+
+public class UserCreationException extends RESTException {
+	
+	public UserCreationException() {
+	}
 	
 	public UserCreationException(Throwable cause) {
 		super("failed to create new user", cause);

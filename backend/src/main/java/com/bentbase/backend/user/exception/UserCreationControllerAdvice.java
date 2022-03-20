@@ -2,6 +2,7 @@ package com.bentbase.backend.user.exception;
 
 import com.bentbase.backend.core.dto.ExceptionResponse;
 import com.bentbase.backend.core.exception.ExceptionControllerAdvice;
+import com.bentbase.backend.core.exception.RESTException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,7 +19,7 @@ public class UserCreationControllerAdvice extends ExceptionControllerAdvice {
 	
 	@Override
 	@ExceptionHandler (UserCreationException.class)
-	public ResponseEntity<ExceptionResponse> handle(Exception exception) throws Exception {
+	public ResponseEntity<ExceptionResponse> handle(RESTException exception) {
 		return super.handle(exception);
 	}
 }

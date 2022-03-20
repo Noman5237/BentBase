@@ -11,7 +11,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 	
 	protected final List<ExceptionHandlerFunctor> handlers = new ArrayList<>();
 	
-	public ResponseEntity<ExceptionResponse> handle(Exception exception) throws Exception {
+	public ResponseEntity<ExceptionResponse> handle(RESTException exception) {
 		ResponseEntity<ExceptionResponse> response;
 		for (var handler : handlers) {
 			response = handler.handle(exception);

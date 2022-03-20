@@ -6,5 +6,5 @@ import org.springframework.http.ResponseEntity;
 @FunctionalInterface
 public interface ExceptionHandlerFunctor {
 	
-	ResponseEntity<ExceptionResponse> handle(Exception exception);
+	ResponseEntity<ExceptionResponse> handle(RESTException exception);
 }
