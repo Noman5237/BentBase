@@ -21,6 +21,4 @@ public class Admin {
 	@OneToOne (optional = false, orphanRemoval = true)
 	@JoinColumn (name = "user_email", nullable = false)
 	private User user;
-
-//	roles
 }

@@ -1,5 +1,8 @@
 package com.bentbase.backend.utils;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import org.springframework.data.domain.Page;
 
 import java.util.HashMap;
@@ -17,5 +20,15 @@ public class PageUtil {
 		pageMeta.put("items", page.getNumberOfElements());
 		
 		return pageMeta;
+	}
+	
+	@AllArgsConstructor
+	@Builder
+	@Getter
+	public static class Paginate {
+		
+		private int page;
+		private int size;
+		private String[] sorts;
 	}
 }
