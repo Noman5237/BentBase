@@ -1,0 +1,27 @@
+package com.bentbase.backend.buyer;
+
+import com.bentbase.backend.project.Project;
+import com.bentbase.backend.user.rest.User;
+import com.bentbase.backend.utils.PageUtil;
+import lombok.*;
+import org.springframework.data.domain.Page;
+
+import javax.persistence.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Getter
+@Setter
+@Entity
+@Table (name = "buyer")
+public class Buyer {
+	
+	@Id
+	@Column (nullable = false)
+	private String userEmail;
+	
+	@OneToOne (optional = false, orphanRemoval = true)
+	@JoinColumn (name = "user_email", nullable = false)
+	private User user;
+}
