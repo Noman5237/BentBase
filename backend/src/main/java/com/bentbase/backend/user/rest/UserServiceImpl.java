@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.orm.jpa.JpaSystemException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Map;
 import java.util.Optional;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(FallbackExceptionHandler.class);

@@ -40,5 +40,5 @@ public class User {
 	private Date dob;
 	
 	//	image
-	private String image;
+//	private String image;
 }
