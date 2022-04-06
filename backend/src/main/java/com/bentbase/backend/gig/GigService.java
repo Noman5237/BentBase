@@ -1,7 +1,7 @@
 package com.bentbase.backend.gig;
 
+import com.bentbase.backend.project.Project;
 import com.bentbase.backend.tag.Tag;
-import com.bentbase.backend.utils.PageUtil;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 
@@ -13,7 +13,9 @@ public interface GigService {
 	
 	Gig getGigById(String id);
 	
-	Page<Gig> getGigsByTag(List<Tag> tags, Paginate paginate);
+	Page<Gig> searchGigs(String title, List<Tag> tags, Paginate paginate);
+	
+	Page<Project> getProjects(Gig gig, Paginate paginate);
 	
 	Gig updateGig(Gig gig);
 	

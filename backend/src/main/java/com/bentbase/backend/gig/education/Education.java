@@ -1,4 +1,4 @@
-package com.bentbase.backend.gig;
+package com.bentbase.backend.gig.education;
 
 public class Education {
 	

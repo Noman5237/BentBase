@@ -2,9 +2,11 @@ package com.bentbase.backend.user.rest;
 
 import com.bentbase.backend.review.Review;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 
+@Service
 public interface UserService {
 	
 	Page<User> getAllUsers(int page, int size, String[] sorts);
@@ -18,6 +20,4 @@ public interface UserService {
 	void deleteUserByEmail(String email);
 	
 	void postReview(Review review);
-	
-	void deleteReviewById(int reviewId);
 }

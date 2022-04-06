@@ -9,7 +9,7 @@ public interface TagService {
 	
 	Tag getTagByName(String name);
 	
-	Page<Tag> searchTags(String query, int page, int size, String[] sorts);
+	Page<Tag> searchTags(String query, Paginate paginate);
 	
 	Tag createTag(Tag tag);
 	

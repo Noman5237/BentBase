@@ -24,5 +24,5 @@ public class Seller {
 	@JoinColumn (name = "user_email", nullable = false)
 	private User user;
 	
-	private List<Gig> gigs;
+	
 }

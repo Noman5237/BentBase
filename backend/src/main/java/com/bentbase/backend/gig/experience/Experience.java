@@ -1,4 +1,4 @@
-package com.bentbase.backend.gig;
+package com.bentbase.backend.gig.experience;
 
 import java.sql.Time;
 

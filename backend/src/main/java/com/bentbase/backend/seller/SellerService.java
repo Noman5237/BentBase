@@ -1,17 +1,24 @@
 package com.bentbase.backend.seller;
 
 import com.bentbase.backend.gig.Gig;
+import com.bentbase.backend.project.application.Application;
 import com.bentbase.backend.project.Project;
+import com.bentbase.backend.utils.PageUtil.Paginate;
+import org.springframework.data.domain.Page;
 
 public interface SellerService {
 	
-	void createGig(Gig gig);
+	Page<Seller> getAllSellers(Paginate paginate);
 	
-	void updateGig(Gig gig);
+	Seller getSellerByEmail(String email);
 	
-	void deleteGigById(String id);
+	Page<Application> getApplications(Seller seller, Paginate paginate);
 	
-	void applyForJob(Project project);
+	Page<Application> getApplications(Seller seller, Application.Status status, Paginate paginate);
 	
-	void deleteJobApplicationById(String id);
+	Page<Gig> getGigs();
+	
+	void applyForProject(Project project);
+	
+	void deleteSellerByEmail(String email);
 }

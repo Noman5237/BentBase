@@ -1,12 +1,12 @@
 package com.bentbase.backend.buyer;
 
 import com.bentbase.backend.project.Project;
-import com.bentbase.backend.review.Review;
 import com.bentbase.backend.user.rest.User;
+import com.bentbase.backend.utils.PageUtil;
 import lombok.*;
+import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +24,4 @@ public class Buyer {
 	@OneToOne (optional = false, orphanRemoval = true)
 	@JoinColumn (name = "user_email", nullable = false)
 	private User user;
-	
-	private List<Project> projects;
-	private List<Review> reviews;
 }
