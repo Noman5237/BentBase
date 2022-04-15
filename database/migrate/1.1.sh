@@ -1,1 +1,1 @@
-node script/faker-js/index.js user --limit 1000000 --seed 1
+node script/faker-js/index.js user --limit 100 --seed 1
