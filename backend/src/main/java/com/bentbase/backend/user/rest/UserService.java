@@ -1,6 +1,7 @@
 package com.bentbase.backend.user.rest;
 
 import com.bentbase.backend.review.Review;
+import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import java.util.Map;
 @Service
 public interface UserService {
 	
-	Page<User> getAllUsers(int page, int size, String[] sorts);
+	Page<User> getAllUsers(Paginate paginate);
 	
 	User getUserByEmail(String email);
 	

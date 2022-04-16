@@ -1,11 +1,13 @@
-package com.bentbase.backend.user.rest;
+package com.bentbase.backend.seller;
 
 import com.bentbase.backend.core.exception.RESTException;
-import com.bentbase.backend.review.Review;
+import com.bentbase.backend.gig.Gig;
+import com.bentbase.backend.project.Project;
+import com.bentbase.backend.project.application.Application;
 import com.bentbase.backend.user.exception.UserCreateException;
 import com.bentbase.backend.user.exception.UserGetException;
 import com.bentbase.backend.user.exception.UserUpdateException;
-import com.bentbase.backend.utils.PageUtil.Paginate;
+import com.bentbase.backend.user.rest.User;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
 import lombok.SneakyThrows;
@@ -21,23 +23,25 @@ import org.springframework.transaction.TransactionSystemException;
 import java.util.Map;
 import java.util.Optional;
 
+import static com.bentbase.backend.utils.PageUtil.Paginate;
+
 @Service
-public class UserServiceImpl implements UserService {
+public class SellerServiceImpl implements SellerService {
 	
-	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(SellerServiceImpl.class);
 	
-	private final UserRepository userRepository;
+	private final SellerRepository sellerRepository;
 	
-	public UserServiceImpl(UserRepository userRepository) {
-		this.userRepository = userRepository;
+	public SellerServiceImpl(SellerRepository sellerRepository) {
+		this.sellerRepository = sellerRepository;
 	}
 	
 	@SneakyThrows
 	@Override
-	public Page<User> getAllUsers(Paginate paginate) {
+	public Page<Seller> getAllSellers(Paginate paginate) {
 		try {
 			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
-			return userRepository.findAll(pagingSort);
+			return sellerRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new UserGetException(exception);
 		}
@@ -45,25 +49,40 @@ public class UserServiceImpl implements UserService {
 	
 	@SneakyThrows
 	@Override
-	public User getUserByEmail(String email) {
-		Optional<User> user = userRepository.findByEmail(email);
-		if (user.isEmpty()) {
+	public Seller getSellerByEmail(String email) {
+		Optional<Seller> seller = sellerRepository.findByEmail(email);
+		if (seller.isEmpty()) {
 			throw new UserGetException().withError("email", "does not exist");
 		}
 		
-		return user.get();
+		return seller.get();
+	}
+	
+	@Override
+	public Page<Application> getApplications(Seller seller, Paginate paginate) {
+		return null;
+	}
+	
+	@Override
+	public Page<Application> getApplications(Seller seller, Application.Status status, Paginate paginate) {
+		return null;
+	}
+	
+	@Override
+	public Page<Gig> getGigs() {
+		return null;
 	}
 	
 	@SneakyThrows
 	@Override
-	public User createUser(User user) {
-		Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+	public Seller createSeller(Seller seller) {
+		Optional<Seller> existingUser = sellerRepository.findByEmail(seller.getEmail());
 		if (existingUser.isPresent()) {
 			throw new UserCreateException().withError("email", "already exists");
 		}
 		
 		try {
-			return userRepository.save(user);
+			return sellerRepository.save(seller);
 		} catch (TransactionSystemException | JpaSystemException exception) {
 			throw new UserCreateException(exception);
 		}
@@ -71,31 +90,31 @@ public class UserServiceImpl implements UserService {
 	
 	@SneakyThrows
 	@Override
-	public User updateUser(Map<String, Object> properties) {
+	public Seller updateSeller(Map<String, Object> properties) {
 		if (!properties.containsKey("email")) {
 			throw new UserGetException().withError("email", "must not be blank");
 		}
 		
 		var email = (String) properties.get("email");
-		var user = this.getUserByEmail(email);
+		var seller = this.getSellerByEmail(email);
 		
 		try {
-			PatchUtil.update(user, properties);
+			PatchUtil.update(seller, properties);
 		} catch (RESTException exception) {
 			throw new UserUpdateException(exception);
 		}
 		
-		return userRepository.save(user);
-	}
-	
-	public void deleteUserByEmail(String email) {
-		this.getUserByEmail(email);
-		userRepository.deleteUserByEmail(email);
+		return sellerRepository.save(seller);
 	}
 	
 	@Override
-	public void postReview(Review review) {
+	public void applyForProject(Project project) {
 		throw new NotYetImplementedException();
 	}
 	
+	@Override
+	public void deleteSellerByEmail(String email) {
+		this.getSellerByEmail(email);
+		sellerRepository.deleteUserByEmail(email);
+	}
 }

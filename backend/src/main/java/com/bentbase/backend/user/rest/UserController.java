@@ -1,10 +1,10 @@
 package com.bentbase.backend.user.rest;
 
 import com.bentbase.backend.utils.PageUtil;
+import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -23,16 +23,9 @@ public class UserController {
 			@RequestParam (defaultValue = "10") int size,
 			@RequestParam (required = false, defaultValue = "email,asc") String[] sorts) {
 		
-		Page<User> usersPage = userService.getAllUsers(page, size, sorts);
+		Page<User> usersPage = userService.getAllUsers(new Paginate(page, size, sorts));
 		
-		var meta = new HashMap<String, Object>();
-		meta.put("page", PageUtil.getMeta(usersPage));
-		
-		Map<String, Object> response = new HashMap<>();
-		response.put("meta", meta);
-		response.put("data", usersPage.getContent());
-		
-		return response;
+		return PageUtil.createResponseWithPaginatedMeta(usersPage);
 	}
 	
 	@GetMapping ("/{email}")

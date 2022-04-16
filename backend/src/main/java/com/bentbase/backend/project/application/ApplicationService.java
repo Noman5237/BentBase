@@ -11,6 +11,8 @@ public interface ApplicationService {
 	
 	Application getApplicationById(String id);
 	
+	String getCoverLetter(Application application, boolean preview);
+	
 	Application createApplication(Application application);
 	
 	Application updateApplication(Application application);

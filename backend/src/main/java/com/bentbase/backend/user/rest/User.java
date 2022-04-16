@@ -2,43 +2,41 @@ package com.bentbase.backend.user.rest;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Inheritance (strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @ToString
 @Entity
 @Table (name = "\"user\"")
-public class User {
+public class User implements Serializable {
 	
 	@Id
 	@Column (nullable = false)
 	@Email (message = "email address must be valid")
-	private String email;
+	protected String email;
 	
 	@Column
 	@NotBlank
-	private String firstName;
+	protected String firstName;
 	
 	@Column
 	@NotBlank
-	private String lastName;
+	protected String lastName;
 	
 	//	FIXME: Add a date constraint of at least 12 years
 	@Column
 	@NotNull
-	private Date dob;
+	protected Date dob;
 	
-	//	image
-//	private String image;
+	@Column
+	protected String image;
 }

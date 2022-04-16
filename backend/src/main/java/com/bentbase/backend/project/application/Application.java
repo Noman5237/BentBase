@@ -1,20 +1,39 @@
 package com.bentbase.backend.project.application;
 
-import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.seller.Seller;
+import lombok.*;
 
+import javax.persistence.*;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Entity
+@ToString
+@Table (name = "application")
 public class Application {
 	
-	private String id;
-	private Seller applicant;
-	private Gig gig;
+	@Id
+	@Column (nullable = false)
+	private Long id;
+	
+	@Lob
+	@Column
 	private String coverLetter;
 	
+//	@ManyToOne (fetch = FetchType.EAGER)
+//	@JoinColumn (name = "gig_id")
+//	private Gig gig;
+	
+	@ManyToOne (fetch = FetchType.EAGER)
+	@JoinColumn (name = "seller_email")
+	private Seller sellerEmail;
+	
 	public enum Status {
-		PENDING,
-		APPROVED
+		PENDING, APPROVED
 	}
 	
+	@Column
 	private Status status;
-	
 }

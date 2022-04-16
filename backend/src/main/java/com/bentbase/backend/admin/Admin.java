@@ -1,24 +1,22 @@
 package com.bentbase.backend.admin;
 
-import com.bentbase.backend.user.rest.User;
-import lombok.*;
+import com.bentbase.backend.seller.Seller;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
+@PrimaryKeyJoinColumn (name = "user_email")
 @Table (name = "admin")
-public class Admin {
-	
-	@Id
-	@Column (nullable = false)
-	private String userEmail;
-	
-	@OneToOne (optional = false, orphanRemoval = true)
-	@JoinColumn (name = "user_email", nullable = false)
-	private User user;
+public class Admin extends Seller {
+
 }

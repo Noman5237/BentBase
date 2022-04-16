@@ -22,6 +22,16 @@ public class PageUtil {
 		return pageMeta;
 	}
 	
+	public static Map<String, Object> createResponseWithPaginatedMeta(Page<?> page) {
+		var meta = new HashMap<String, Object>();
+		meta.put("page", PageUtil.getMeta(page));
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("meta", meta);
+		response.put("data", page.getContent());
+		return response;
+	}
+	
 	@AllArgsConstructor
 	@Builder
 	@Getter

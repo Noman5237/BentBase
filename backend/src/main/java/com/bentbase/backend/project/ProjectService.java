@@ -15,6 +15,8 @@ public interface ProjectService {
 	
 	Page<Project> searchProjects(String title, List<Tag> tags, Paginate paginate);
 	
+	String getDescription(Project project, boolean preview);
+	
 	Page<Application> getApplications(Project project, Paginate paginate);
 	
 	Page<Application> getApplications(Project project, Application.Status status, Paginate paginate);
