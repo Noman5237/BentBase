@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService {
 	
 	public void deleteUserByEmail(String email) {
 		this.getUserByEmail(email);
-		userRepository.deleteUserByEmail(email);
+		userRepository.deleteByEmail(email);
 	}
 	
 	@Override

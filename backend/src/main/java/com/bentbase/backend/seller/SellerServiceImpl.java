@@ -115,6 +115,6 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public void deleteSellerByEmail(String email) {
 		this.getSellerByEmail(email);
-		sellerRepository.deleteUserByEmail(email);
+		sellerRepository.deleteByEmail(email);
 	}
 }

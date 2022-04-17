@@ -1,6 +1,6 @@
 package com.bentbase.backend.admin;
 
-import com.bentbase.backend.seller.Seller;
+import com.bentbase.backend.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,8 +15,8 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Entity
-@PrimaryKeyJoinColumn (name = "user_email")
 @Table (name = "admin")
-public class Admin extends Seller {
+@PrimaryKeyJoinColumn (name = "user_email")
+public class Admin extends User {
 
 }

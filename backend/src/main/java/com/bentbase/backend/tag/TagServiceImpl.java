@@ -94,7 +94,7 @@ public class TagServiceImpl implements TagService {
 					.withError("name", "must not be blank");
 		}
 		
-		var tag = properties.containsKey("id") ? getTagById((Long) properties.get("id")) : getTagByName((String) properties.get("name"));
+		var tag = properties.containsKey("id") ? getTagById(Long.valueOf((Integer) properties.get("id"))) : getTagByName((String) properties.get("name"));
 		
 		try {
 			PatchUtil.update(tag, properties);
@@ -114,6 +114,6 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public void deleteTagByName(String name) {
 		this.getTagByName(name);
-		tagRepository.deleteTagByName(name);
+		tagRepository.deleteByName(name);
 	}
 }

@@ -17,7 +17,7 @@ public class SellerController {
 	}
 	
 	@GetMapping ()
-	public Map<String, Object> getAllUsers(
+	public Map<String, Object> getAllSellers(
 			@RequestParam (defaultValue = "0") int page,
 			@RequestParam (defaultValue = "10") int size,
 			@RequestParam (required = false, defaultValue = "email,asc") String[] sorts) {
