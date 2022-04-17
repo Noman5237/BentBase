@@ -2,7 +2,9 @@ package com.bentbase.backend.tag;
 
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface TagService {
 	
 	Page<Tag> getAllTags(Paginate paginate);

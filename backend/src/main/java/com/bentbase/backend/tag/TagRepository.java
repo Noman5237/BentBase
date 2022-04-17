@@ -9,5 +9,6 @@ public interface TagRepository extends JpaRepository<Tag, Integer> {
 	@Override
 	Page<Tag> findAll(Pageable pageable);
 	
-	Tag findByNameIs(String name);
+	Tag findByName(String name);
+	
 }
