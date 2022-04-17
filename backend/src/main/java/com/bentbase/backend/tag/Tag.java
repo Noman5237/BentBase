@@ -21,11 +21,11 @@ public class Tag {
 	@Column (nullable = false)
 	private Long id;
 	
-	@Column
+	@Column (unique = true, length = 50)
 	@NotBlank
 	private String name;
 	
-	@Column
+	@Column (length = 512)
 	@NotBlank
 	private String description;
 }

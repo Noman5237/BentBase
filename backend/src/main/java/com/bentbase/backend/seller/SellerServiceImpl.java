@@ -1,13 +1,13 @@
 package com.bentbase.backend.seller;
 
 import com.bentbase.backend.core.exception.RESTException;
+import com.bentbase.backend.core.exception.generic.CreateException;
+import com.bentbase.backend.core.exception.generic.GetException;
+import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.project.Project;
 import com.bentbase.backend.project.application.Application;
-import com.bentbase.backend.user.exception.UserCreateException;
-import com.bentbase.backend.user.exception.UserGetException;
-import com.bentbase.backend.user.exception.UserUpdateException;
-import com.bentbase.backend.user.rest.User;
+import com.bentbase.backend.user.User;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
 import lombok.SneakyThrows;
@@ -43,7 +43,7 @@ public class SellerServiceImpl implements SellerService {
 			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
 			return sellerRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
-			throw new UserGetException(exception);
+			throw new GetException(Seller.class, exception);
 		}
 	}
 	
@@ -52,7 +52,7 @@ public class SellerServiceImpl implements SellerService {
 	public Seller getSellerByEmail(String email) {
 		Optional<Seller> seller = sellerRepository.findByEmail(email);
 		if (seller.isEmpty()) {
-			throw new UserGetException().withError("email", "does not exist");
+			throw new GetException(Seller.class).withError("email", "does not exist");
 		}
 		
 		return seller.get();
@@ -78,13 +78,13 @@ public class SellerServiceImpl implements SellerService {
 	public Seller createSeller(Seller seller) {
 		Optional<Seller> existingUser = sellerRepository.findByEmail(seller.getEmail());
 		if (existingUser.isPresent()) {
-			throw new UserCreateException().withError("email", "already exists");
+			throw new CreateException(Seller.class).withError("email", "already exists");
 		}
 		
 		try {
 			return sellerRepository.save(seller);
 		} catch (TransactionSystemException | JpaSystemException exception) {
-			throw new UserCreateException(exception);
+			throw new CreateException(Seller.class, exception);
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public Seller updateSeller(Map<String, Object> properties) {
 		if (!properties.containsKey("email")) {
-			throw new UserGetException().withError("email", "must not be blank");
+			throw new GetException(Seller.class).withError("email", "must not be blank");
 		}
 		
 		var email = (String) properties.get("email");
@@ -101,7 +101,7 @@ public class SellerServiceImpl implements SellerService {
 		try {
 			PatchUtil.update(seller, properties);
 		} catch (RESTException exception) {
-			throw new UserUpdateException(exception);
+			throw new UpdateException(Seller.class, exception);
 		}
 		
 		return sellerRepository.save(seller);

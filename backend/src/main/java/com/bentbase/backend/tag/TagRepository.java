@@ -4,11 +4,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface TagRepository extends JpaRepository<Tag, Integer> {
+import java.util.Optional;
+
+public interface TagRepository extends JpaRepository<Tag, Long> {
 	
 	@Override
 	Page<Tag> findAll(Pageable pageable);
 	
-	Tag findByName(String name);
+	Optional<Tag> findById(Long id);
+	
+	Optional<Tag> findByName(String name);
 	
 }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping ("/users")
+@RequestMapping ("/tags")
 public class TagController {
 	
 	private final TagService tagService;

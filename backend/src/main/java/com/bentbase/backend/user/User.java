@@ -1,4 +1,4 @@
-package com.bentbase.backend.user.rest;
+package com.bentbase.backend.user;
 
 import lombok.*;
 

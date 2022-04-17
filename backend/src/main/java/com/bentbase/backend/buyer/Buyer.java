@@ -1,10 +1,7 @@
 package com.bentbase.backend.buyer;
 
-import com.bentbase.backend.project.Project;
-import com.bentbase.backend.user.rest.User;
-import com.bentbase.backend.utils.PageUtil;
+import com.bentbase.backend.user.User;
 import lombok.*;
-import org.springframework.data.domain.Page;
 
 import javax.persistence.*;
 

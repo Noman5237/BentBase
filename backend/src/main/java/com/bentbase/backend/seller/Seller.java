@@ -1,6 +1,6 @@
 package com.bentbase.backend.seller;
 
-import com.bentbase.backend.user.rest.User;
+import com.bentbase.backend.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

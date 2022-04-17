@@ -1,10 +1,10 @@
-package com.bentbase.backend.user.rest;
+package com.bentbase.backend.user;
 
 import com.bentbase.backend.core.exception.RESTException;
+import com.bentbase.backend.core.exception.generic.CreateException;
+import com.bentbase.backend.core.exception.generic.GetException;
+import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.review.Review;
-import com.bentbase.backend.user.exception.UserCreateException;
-import com.bentbase.backend.user.exception.UserGetException;
-import com.bentbase.backend.user.exception.UserUpdateException;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
 			return userRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
-			throw new UserGetException(exception);
+			throw new GetException(User.class, exception);
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	public User getUserByEmail(String email) {
 		Optional<User> user = userRepository.findByEmail(email);
 		if (user.isEmpty()) {
-			throw new UserGetException().withError("email", "does not exist");
+			throw new GetException(User.class).withError("email", "does not exist");
 		}
 		
 		return user.get();
@@ -59,13 +59,13 @@ public class UserServiceImpl implements UserService {
 	public User createUser(User user) {
 		Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
 		if (existingUser.isPresent()) {
-			throw new UserCreateException().withError("email", "already exists");
+			throw new CreateException(User.class).withError("email", "already exists");
 		}
 		
 		try {
 			return userRepository.save(user);
 		} catch (TransactionSystemException | JpaSystemException exception) {
-			throw new UserCreateException(exception);
+			throw new CreateException(User.class, exception);
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User updateUser(Map<String, Object> properties) {
 		if (!properties.containsKey("email")) {
-			throw new UserGetException().withError("email", "must not be blank");
+			throw new GetException(User.class).withError("email", "must not be blank");
 		}
 		
 		var email = (String) properties.get("email");
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			PatchUtil.update(user, properties);
 		} catch (RESTException exception) {
-			throw new UserUpdateException(exception);
+			throw new UpdateException(User.class, exception);
 		}
 		
 		return userRepository.save(user);
