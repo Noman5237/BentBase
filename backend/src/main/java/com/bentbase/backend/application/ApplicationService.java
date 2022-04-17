@@ -3,19 +3,17 @@ package com.bentbase.backend.application;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 
+import java.util.Map;
+
 public interface ApplicationService {
 	
 	Page<Application> getAllApplications(Paginate paginate);
 	
-	Page<Application> getAllApplications(Long status, Paginate paginate);
-	
-	Application getApplicationById(String id);
-	
-	String getCoverLetter(Application application, boolean preview);
+	Application getApplicationById(Long id);
 	
 	Application createApplication(Application application);
 	
-	Application updateApplication(Application application);
+	Application updateApplication(Map<String, Object> properties);
 	
-	void deleteApplicationById(String id);
+	void deleteApplicationById(Long id);
 }

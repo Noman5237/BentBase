@@ -12,10 +12,12 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Entity
 @ToString
+@SequenceGenerator (name = "application_id_generator", sequenceName = "application_id_sequence", allocationSize = 1)
 @Table (name = "application")
 public class Application {
 	
 	@Id
+	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "application_id_generator")
 	@Column (nullable = false)
 	private Long id;
 	
