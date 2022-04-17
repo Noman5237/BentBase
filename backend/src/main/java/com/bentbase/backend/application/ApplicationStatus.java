@@ -1,6 +1,4 @@
-package com.bentbase.backend.project;
-
-import com.bentbase.backend.project.application.Application;
+package com.bentbase.backend.application;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;

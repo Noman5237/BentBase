@@ -1,6 +1,6 @@
 package com.bentbase.backend.project;
 
-import com.bentbase.backend.project.application.Application;
+import com.bentbase.backend.application.Application;
 import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;

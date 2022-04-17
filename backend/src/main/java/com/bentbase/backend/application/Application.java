@@ -1,4 +1,4 @@
-package com.bentbase.backend.project.application;
+package com.bentbase.backend.application;
 
 import com.bentbase.backend.seller.Seller;
 import lombok.*;

@@ -1,18 +1,35 @@
 package com.bentbase.backend.gig;
 
-import com.bentbase.backend.gig.education.Education;
-import com.bentbase.backend.gig.experience.Experience;
-import com.bentbase.backend.tag.Tag;
+import lombok.*;
 
-import java.util.List;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@Entity
+@SequenceGenerator (name = "gig_id_generator", sequenceName = "gig_id_sequence", allocationSize = 1)
+@Table (name = "gig")
 public class Gig {
 	
-	private String id;
+	@Id
+	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "gig_id_generator")
+	@Column (nullable = false)
+	private Long id;
+	
+	@Column
+	@NotBlank
 	private String title;
+	
+	@Column
+	@NotBlank
 	private String about;
 	
-	private List<Tag> tags;
-	private List<Experience> experiences;
-	private List<Education> education;
+	@Column
+	@Email (message = "email address must be valid")
+	private String seller_email;
 }

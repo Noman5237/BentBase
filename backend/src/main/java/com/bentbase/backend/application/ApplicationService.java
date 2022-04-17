@@ -1,4 +1,4 @@
-package com.bentbase.backend.project.application;
+package com.bentbase.backend.application;
 
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;

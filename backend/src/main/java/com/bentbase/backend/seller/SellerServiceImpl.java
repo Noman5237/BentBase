@@ -6,7 +6,7 @@ import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.project.Project;
-import com.bentbase.backend.project.application.Application;
+import com.bentbase.backend.application.Application;
 import com.bentbase.backend.user.User;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;

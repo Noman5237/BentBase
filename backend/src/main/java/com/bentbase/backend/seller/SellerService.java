@@ -2,7 +2,7 @@ package com.bentbase.backend.seller;
 
 import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.project.Project;
-import com.bentbase.backend.project.application.Application;
+import com.bentbase.backend.application.Application;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
