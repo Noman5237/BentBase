@@ -7,7 +7,7 @@ public interface ApplicationService {
 	
 	Page<Application> getAllApplications(Paginate paginate);
 	
-	Page<Application> getAllApplications(Application.Status status, Paginate paginate);
+	Page<Application> getAllApplications(Long status, Paginate paginate);
 	
 	Application getApplicationById(String id);
 	

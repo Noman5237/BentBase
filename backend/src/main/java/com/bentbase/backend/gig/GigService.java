@@ -1,7 +1,7 @@
 package com.bentbase.backend.gig;
 
 import com.bentbase.backend.gig.education.Education;
-import com.bentbase.backend.project.Project;
+import com.bentbase.backend.gig.experience.Experience;
 import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,9 @@ public interface GigService {
 	
 	Page<Education> getEducations(Long gigId, Paginate paginate);
 	
-	Page<Project> getProjects(Gig gig, Paginate paginate);
+	Page<Experience> getExperiences(Long gigId, Paginate paginate);
+
+//	Page<Project> getProjects(Gig gig, Paginate paginate);
 	
 	Gig createGig(Gig gig);
 	

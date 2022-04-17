@@ -5,7 +5,7 @@ import com.bentbase.backend.core.exception.generic.CreateException;
 import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.gig.education.Education;
-import com.bentbase.backend.project.Project;
+import com.bentbase.backend.gig.experience.Experience;
 import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
@@ -66,13 +66,16 @@ public class GigServiceImpl implements GigService {
 	@Override
 	public Page<Education> getEducations(Long gigId, Paginate paginate) {
 		this.getGigById(gigId);
-		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Gig.class));
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Education.class));
 		return gigRepository.getAllEducations(gigId, pagingSort);
 	}
 	
+	@SneakyThrows
 	@Override
-	public Page<Project> getProjects(Gig gig, Paginate paginate) {
-		return null;
+	public Page<Experience> getExperiences(Long gigId, Paginate paginate) {
+		this.getGigById(gigId);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Experience.class));
+		return gigRepository.getAllExperiences(gigId, pagingSort);
 	}
 	
 	@SneakyThrows

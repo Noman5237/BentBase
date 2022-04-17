@@ -1,9 +1,10 @@
 package com.bentbase.backend.application;
 
-import com.bentbase.backend.seller.Seller;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,20 +21,22 @@ public class Application {
 	
 	@Lob
 	@Column
+	@NotBlank
 	private String coverLetter;
 	
-//	@ManyToOne (fetch = FetchType.EAGER)
-//	@JoinColumn (name = "gig_id")
-//	private Gig gig;
-	
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn (name = "seller_email")
-	private Seller sellerEmail;
-	
-	public enum Status {
-		PENDING, APPROVED
-	}
+	@Column
+	@NotNull
+	private Long status;
 	
 	@Column
-	private Status status;
+	@NotNull
+	private Long gigId;
+	
+	@Column
+	@NotNull
+	private String sellerEmail;
+	
+	@Column
+	@NotNull
+	private Long projectId;
 }

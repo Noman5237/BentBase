@@ -64,7 +64,7 @@ public class SellerServiceImpl implements SellerService {
 	}
 	
 	@Override
-	public Page<Application> getApplications(Seller seller, Application.Status status, Paginate paginate) {
+	public Page<Application> getApplications(Seller seller, Long status, Paginate paginate) {
 		return null;
 	}
 	

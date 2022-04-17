@@ -18,7 +18,7 @@ public interface SellerService {
 	
 	Page<Application> getApplications(Seller seller, Paginate paginate);
 	
-	Page<Application> getApplications(Seller seller, Application.Status status, Paginate paginate);
+	Page<Application> getApplications(Seller seller, Long status, Paginate paginate);
 	
 	Page<Gig> getGigs();
 	

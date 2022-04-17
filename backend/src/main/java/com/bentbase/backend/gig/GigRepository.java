@@ -1,6 +1,7 @@
 package com.bentbase.backend.gig;
 
 import com.bentbase.backend.gig.education.Education;
+import com.bentbase.backend.gig.experience.Experience;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,6 +24,9 @@ public interface GigRepository extends JpaRepository<Gig, Long>, JpaSpecificatio
 	
 	@Query ("select e from Education e where e.gigId = :id")
 	Page<Education> getAllEducations(@Param ("id") Long id, Pageable pageable);
+	
+	@Query ("select e from Experience e where e.gigId = :id")
+	Page<Experience> getAllExperiences(@Param ("id") Long gigId, Pageable pagingSort);
 	
 	@Transactional
 	void deleteById(Long id);

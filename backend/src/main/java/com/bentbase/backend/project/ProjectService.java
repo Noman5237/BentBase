@@ -19,7 +19,7 @@ public interface ProjectService {
 	
 	Page<Application> getApplications(Project project, Paginate paginate);
 	
-	Page<Application> getApplications(Project project, Application.Status status, Paginate paginate);
+	Page<Application> getApplications(Project project, Long status, Paginate paginate);
 	
 	Project createProject(Project project);
 	

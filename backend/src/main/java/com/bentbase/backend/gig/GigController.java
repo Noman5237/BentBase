@@ -43,6 +43,17 @@ public class GigController {
 		return PageUtil.createResponseWithPaginatedMeta(educationsPage);
 	}
 	
+	@GetMapping ("/{id}/experiences")
+	public Map<String, Object> getAllExperiences(@PathVariable ("id") Long id,
+	                                             @RequestParam (defaultValue = "0") int page,
+	                                             @RequestParam (defaultValue = "10") int size,
+	                                             @RequestParam (required = false, defaultValue = "id,asc") String[] sorts) {
+		
+		var experiencesPage = gigService.getExperiences(id, new PageUtil.Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(experiencesPage);
+	}
+	
 	@PostMapping ("/create")
 	public Gig createGig(@RequestBody Gig gig) {
 		return gigService.createGig(gig);
