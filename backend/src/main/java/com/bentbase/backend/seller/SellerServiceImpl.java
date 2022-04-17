@@ -1,12 +1,12 @@
 package com.bentbase.backend.seller;
 
+import com.bentbase.backend.application.Application;
 import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.core.exception.generic.CreateException;
 import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.project.Project;
-import com.bentbase.backend.application.Application;
 import com.bentbase.backend.user.User;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
@@ -58,19 +58,18 @@ public class SellerServiceImpl implements SellerService {
 		return seller.get();
 	}
 	
+	@SneakyThrows
 	@Override
-	public Page<Application> getApplications(Seller seller, Paginate paginate) {
-		return null;
+	public Page<Gig> getGigs(String email, Paginate paginate) {
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Gig.class));
+		return sellerRepository.getAllGigs(email, pagingSort);
 	}
 	
+	@SneakyThrows
 	@Override
-	public Page<Application> getApplications(Seller seller, Long status, Paginate paginate) {
-		return null;
-	}
-	
-	@Override
-	public Page<Gig> getGigs() {
-		return null;
+	public Page<Application> getApplications(String email, Paginate paginate) {
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Application.class));
+		return sellerRepository.getAllApplications(email, pagingSort);
 	}
 	
 	@SneakyThrows

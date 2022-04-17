@@ -32,6 +32,28 @@ public class SellerController {
 		return sellerService.getSellerByEmail(email);
 	}
 	
+	@GetMapping ("/{email}/gigs")
+	public Map<String, Object> getAllGigs(@PathVariable ("email") String email,
+	                                      @RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "id,asc") String[] sorts) {
+		
+		var gigsPage = sellerService.getGigs(email, new PageUtil.Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(gigsPage);
+	}
+	
+	@GetMapping ("/{email}/applications")
+	public Map<String, Object> getAllApplications(@PathVariable ("email") String email,
+	                                              @RequestParam (defaultValue = "0") int page,
+	                                              @RequestParam (defaultValue = "10") int size,
+	                                              @RequestParam (required = false, defaultValue = "id,asc") String[] sorts) {
+		
+		var applicationsPage = sellerService.getApplications(email, new PageUtil.Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(applicationsPage);
+	}
+	
 	@PostMapping ("/create")
 	public Seller createSeller(@RequestBody Seller seller) {
 		return sellerService.createSeller(seller);

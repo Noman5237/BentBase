@@ -1,8 +1,8 @@
 package com.bentbase.backend.seller;
 
+import com.bentbase.backend.application.Application;
 import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.project.Project;
-import com.bentbase.backend.application.Application;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,9 @@ public interface SellerService {
 	
 	Seller getSellerByEmail(String email);
 	
-	Page<Application> getApplications(Seller seller, Paginate paginate);
+	Page<Gig> getGigs(String email, Paginate paginate);
 	
-	Page<Application> getApplications(Seller seller, Long status, Paginate paginate);
-	
-	Page<Gig> getGigs();
+	Page<Application> getApplications(String email, Paginate paginate);
 	
 	Seller createSeller(Seller seller);
 	
