@@ -22,21 +22,21 @@ public class User implements Serializable {
 	@Id
 	@Column (nullable = false)
 	@Email (message = "email address must be valid")
-	protected String email;
+	private String email;
 	
 	@Column
 	@NotBlank
-	protected String firstName;
+	private String firstName;
 	
 	@Column
 	@NotBlank
-	protected String lastName;
+	private String lastName;
 	
 	//	FIXME: Add a date constraint of at least 12 years
 	@Column
 	@NotNull
-	protected Date dob;
+	private Date dob;
 	
 	@Column
-	protected String image;
+	private String image;
 }
