@@ -1,21 +1,12 @@
-create sequence tag_id_sequence;
-
-alter table gig
-    add title varchar2(127) not null;
-alter table gig
-    add about varchar2(512) not null;
-
-create sequence gig_id_sequence;
-
-alter table education
-    modify institution not null;
-alter table education
-    modify degree not null;
-alter table education
-    modify major not null;
-alter table education
-    modify start_year not null;
-alter table education
-    modify end_year not null;
-
-create sequence education_id_sequence;
+create table order_info
+(
+    order_id    number(3) primary key,
+    gig_id      number(3),
+    seller_email   varchar2(255),
+    price       number(9,3),
+    tips        number (5,3),
+    date_of_order date,
+    date_of_delivery date,
+    constraint fk_order_info_gig_id foreign key (gig_id) references gig (id),
+    constraint fk_order_info_seller_email foreign key (seller_email) references seller (user_email)
+);
