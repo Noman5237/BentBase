@@ -24,6 +24,11 @@ public class TagController {
 		return PageUtil.createResponseWithPaginatedMeta(usersPage);
 	}
 	
+	@GetMapping ("/{id}")
+	public Tag getTagById(@PathVariable ("id") Long id) {
+		return tagService.getTagById(id);
+	}
+	
 	@GetMapping ("/{name}")
 	public Tag getTagByName(@PathVariable ("name") String name) {
 		return tagService.getTagByName(name);
@@ -36,8 +41,13 @@ public class TagController {
 	
 	@PatchMapping ("/update")
 	public Tag updateTag(@RequestBody Map<String, Object> properties) {
-//		return tagService.updateTag(properties);
-		return null;
+		return tagService.updateTag(properties);
+	}
+	
+	@DeleteMapping ("/{id}")
+	public String deleteTagById(@PathVariable ("id") Long id) {
+		tagService.deleteTagById(id);
+		return String.format("tag with id: `%s` is deleted", id);
 	}
 	
 	@DeleteMapping ("/{name}")
@@ -45,5 +55,6 @@ public class TagController {
 		tagService.deleteTagByName(name);
 		return String.format("tag with name: `%s` is deleted", name);
 	}
+	
 	
 }

@@ -15,4 +15,5 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
 	
 	Optional<Tag> findByName(String name);
 	
+	void deleteTagByName(String name);
 }
