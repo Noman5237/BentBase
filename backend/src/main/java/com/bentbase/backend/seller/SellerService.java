@@ -20,6 +20,8 @@ public interface SellerService {
 	
 	Page<Application> getApplications(String email, Paginate paginate);
 	
+	Number getTotalEarning(String email);
+	
 	Seller createSeller(Seller seller);
 	
 	Seller updateSeller(Map<String, Object> properties);

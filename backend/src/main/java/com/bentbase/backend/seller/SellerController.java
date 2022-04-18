@@ -54,6 +54,11 @@ public class SellerController {
 		return PageUtil.createResponseWithPaginatedMeta(applicationsPage);
 	}
 	
+	@GetMapping ("/{email}/totalEarning")
+	public Number getTotalEarning(@PathVariable ("email") String email) {
+		return sellerService.getTotalEarning(email);
+	}
+	
 	@PostMapping ("/create")
 	public Seller createSeller(@RequestBody Seller seller) {
 		return sellerService.createSeller(seller);

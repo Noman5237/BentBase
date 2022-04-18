@@ -40,7 +40,10 @@ public class SellerServiceImpl implements SellerService {
 	@Override
 	public Page<Seller> getAllSellers(Paginate paginate) {
 		try {
-			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
+			PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+			                                        paginate.getSize(),
+			                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(),
+			                                                                          Seller.class));
 			return sellerRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new GetException(Seller.class, exception);
@@ -61,15 +64,25 @@ public class SellerServiceImpl implements SellerService {
 	@SneakyThrows
 	@Override
 	public Page<Gig> getGigs(String email, Paginate paginate) {
-		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Gig.class));
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Gig.class));
 		return sellerRepository.getAllGigs(email, pagingSort);
 	}
 	
 	@SneakyThrows
 	@Override
 	public Page<Application> getApplications(String email, Paginate paginate) {
-		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Application.class));
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(),
+		                                                                          Application.class));
 		return sellerRepository.getAllApplications(email, pagingSort);
+	}
+	
+	@Override
+	public Number getTotalEarning(String email) {
+		return sellerRepository.getTotalEarning(email);
 	}
 	
 	@SneakyThrows

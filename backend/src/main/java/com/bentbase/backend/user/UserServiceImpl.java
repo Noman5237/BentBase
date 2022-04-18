@@ -36,7 +36,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Page<User> getAllUsers(Paginate paginate) {
 		try {
-			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
+			PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+			                                        paginate.getSize(),
+			                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
 			return userRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new GetException(User.class, exception);
@@ -52,21 +54,6 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return user.get();
-	}
-	
-	@SneakyThrows
-	@Override
-	public User createUser(User user) {
-		Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
-		if (existingUser.isPresent()) {
-			throw new CreateException(User.class).withError("email", "already exists");
-		}
-		
-		try {
-			return userRepository.save(user);
-		} catch (TransactionSystemException | JpaSystemException exception) {
-			throw new CreateException(User.class, exception);
-		}
 	}
 	
 	@SneakyThrows

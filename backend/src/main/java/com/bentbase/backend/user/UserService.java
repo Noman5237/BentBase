@@ -14,8 +14,6 @@ public interface UserService {
 	
 	User getUserByEmail(String email);
 	
-	User createUser(User user);
-	
 	User updateUser(Map<String, Object> properties);
 	
 	void deleteUserByEmail(String email);

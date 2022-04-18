@@ -33,11 +33,6 @@ public class UserController {
 		return userService.getUserByEmail(email);
 	}
 	
-	@PostMapping ("/create")
-	public User createUser(@RequestBody User user) {
-		return userService.createUser(user);
-	}
-	
 	@PatchMapping ("/update")
 	public User updateUser(@RequestBody Map<String, Object> properties) {
 		return userService.updateUser(properties);
