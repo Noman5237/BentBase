@@ -36,7 +36,6 @@ public class Project {
 	@Column
 	private Long status;
 	
-//	@ManyToOne (fetch = FetchType.EAGER, optional = false)
-//	@JoinColumn (nullable = false)
-//	private Buyer buyerEmail;
+	@Column (nullable = false)
+	private String buyerEmail;
 }

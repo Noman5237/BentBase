@@ -6,24 +6,21 @@ import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ProjectService {
 	
-	Page<Project> getAllProject(Paginate paginate);
+	Page<Project> getAllProjects(Paginate paginate);
 	
-	Project getProjectById(String id);
+	Project getProjectById(Long id);
 	
 	Page<Project> searchProjects(String title, List<Tag> tags, Paginate paginate);
 	
-	String getDescription(Project project, boolean preview);
-	
-	Page<Application> getApplications(Project project, Paginate paginate);
-	
-	Page<Application> getApplications(Project project, Long status, Paginate paginate);
+	Page<Application> getApplications(Long id, Paginate paginate);
 	
 	Project createProject(Project project);
 	
-	Project updateProject(Project project);
+	Project updateProject(Map<String, Object> properties);
 	
-	void deleteProjectById(String id);
+	void deleteProjectById(Long id);
 }
