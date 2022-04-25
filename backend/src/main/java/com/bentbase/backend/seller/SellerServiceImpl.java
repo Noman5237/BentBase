@@ -7,11 +7,10 @@ import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.gig.Gig;
 import com.bentbase.backend.project.Project;
-import com.bentbase.backend.user.User;
+import com.bentbase.backend.project.ProjectService;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
 import lombok.SneakyThrows;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -117,11 +116,6 @@ public class SellerServiceImpl implements SellerService {
 		}
 		
 		return sellerRepository.save(seller);
-	}
-	
-	@Override
-	public void applyForProject(Project project) {
-		throw new NotYetImplementedException();
 	}
 	
 	@Override

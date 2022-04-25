@@ -1,6 +1,5 @@
 package com.bentbase.backend.project;
 
-import com.bentbase.backend.buyer.Buyer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

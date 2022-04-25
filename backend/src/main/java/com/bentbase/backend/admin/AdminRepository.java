@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface AdminRepository extends JpaRepository<Admin, String>, JpaSpecificationExecutor<Seller> {
+public interface AdminRepository extends JpaRepository<Admin, String>, JpaSpecificationExecutor<Admin> {
 	
 	@Override
 	Page<Admin> findAll(Pageable pageable);

@@ -1,5 +1,6 @@
 package com.bentbase.backend.gig;
 
+import com.bentbase.backend.core.exception.constraint.Message;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,6 +31,6 @@ public class Gig {
 	private String about;
 	
 	@Column
-	@Email (message = "email address must be valid")
+	@Email (message = Message.EMAIL)
 	private String seller_email;
 }

@@ -3,6 +3,7 @@ package com.bentbase.backend.core.exception.generic;
 import com.bentbase.backend.core.dto.ExceptionResponse;
 import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.core.exception.RESTExceptionHandlerFunctor;
+import com.bentbase.backend.core.exception.constraint.Message;
 import com.bentbase.backend.utils.ConstraintViolationExceptionUtil;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -19,17 +20,17 @@ public enum FallbackExceptionHandlers {
 		try {
 			Assert.isTrue(exception.getCause() instanceof TransactionSystemException, "");
 			Assert.isTrue(exception.getCause()
-					.getCause() instanceof RollbackException, "");
+			                       .getCause() instanceof RollbackException, "");
 			Assert.isTrue(exception.getCause()
-					.getCause()
-					.getCause() instanceof ConstraintViolationException, "");
+			                       .getCause()
+			                       .getCause() instanceof ConstraintViolationException, "");
 		} catch (Exception ignored) {
 			return null;
 		}
 		
 		var violations = ConstraintViolationExceptionUtil.getViolations((ConstraintViolationException) exception.getCause()
-				.getCause()
-				.getCause());
+		                                                                                                        .getCause()
+		                                                                                                        .getCause());
 		violations.putAll(exception.getErrors());
 		
 		var response = new ExceptionResponse(exception.getMessage(), violations);
@@ -40,16 +41,16 @@ public enum FallbackExceptionHandlers {
 		try {
 			Assert.isTrue(exception.getCause() instanceof RESTException, "");
 			Assert.isTrue(((RESTException) exception.getCause()).getPayloads()
-					.containsKey("invalidAttributes"), "");
+			                                                    .containsKey("invalidAttributes"), "");
 		} catch (Exception ignored) {
 			return null;
 		}
 		
 		//noinspection unchecked
 		List<String> invalidAttributes = (List<String>) ((RESTException) exception.getCause()).getPayloads()
-				.get("invalidAttributes");
+		                                                                                      .get("invalidAttributes");
 		var errors = exception.getErrors();
-		invalidAttributes.forEach(attribute -> errors.put(attribute, "invalid attribute"));
+		invalidAttributes.forEach(attribute -> errors.put(attribute, Message.INVALID_ATTRIBUTE));
 		
 		var response = new ExceptionResponse(exception.getMessage(), errors);
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);

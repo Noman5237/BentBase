@@ -1,8 +1,5 @@
 package com.bentbase.backend.order;
 
-import com.bentbase.backend.order.Order;
-import com.bentbase.backend.order.OrderRepository;
-import com.bentbase.backend.order.OrderService;
 import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.core.exception.generic.CreateException;
 import com.bentbase.backend.core.exception.generic.GetException;

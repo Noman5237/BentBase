@@ -1,8 +1,10 @@
 package com.bentbase.backend.tag;
 
 import lombok.*;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
 
 @AllArgsConstructor
@@ -22,9 +24,11 @@ public class Tag {
 	
 	@Column (unique = true, length = 50)
 	@NotBlank
+//	@Length (max = 50)
 	private String name;
 	
 	@Column (length = 512)
 	@NotBlank
+//	@Length (max = 512)
 	private String description;
 }

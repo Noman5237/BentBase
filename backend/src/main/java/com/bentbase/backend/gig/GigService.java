@@ -21,8 +21,6 @@ public interface GigService {
 	
 	Page<Experience> getExperiences(Long gigId, Paginate paginate);
 
-//	Page<Project> getProjects(Gig gig, Paginate paginate);
-	
 	Gig createGig(Gig gig);
 	
 	Gig updateGig(Map<String, Object> properties);

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface EducationRepository extends JpaRepository<Education, String>, JpaSpecificationExecutor<Seller> {
+public interface EducationRepository extends JpaRepository<Education, String>, JpaSpecificationExecutor<Education> {
 	
 	@Override
 	Page<Education> findAll(Pageable pageable);

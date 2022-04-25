@@ -28,6 +28,7 @@ public interface GigRepository extends JpaRepository<Gig, Long>, JpaSpecificatio
 	@Query ("select e from Experience e where e.gigId = :id")
 	Page<Experience> getAllExperiences(@Param ("id") Long gigId, Pageable pagingSort);
 	
+	@Override
 	@Transactional
 	void deleteById(Long id);
 }

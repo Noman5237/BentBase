@@ -5,10 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -17,10 +15,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@SequenceGenerator (name = "order_id_generator", sequenceName = "order_id_sequence", allocationSize = 1)
 @Table (name = "order_info")
 public class Order {
 	
 	@Id
+	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "order_id_generator")
 	@Column (nullable = false)
 	private Long id;
 	
@@ -37,11 +37,13 @@ public class Order {
 	private LocalDate dateOfDelivery;
 	
 	@Column
+	@NotNull
 	private Long gigId;
 	
 	@Column
-	private String sellerEmail;
+	@NotNull
+	private Long projectId;
 	
 	@Column
-	private Long projectId;
+	private Long orderStatus;
 }

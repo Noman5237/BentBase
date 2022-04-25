@@ -10,6 +10,7 @@ import com.bentbase.backend.utils.PageUtil;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
 import lombok.SneakyThrows;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -67,7 +68,7 @@ public class TagServiceImpl implements TagService {
 	
 	@Override
 	public Page<Tag> searchTags(String query, PageUtil.Paginate paginate) {
-		return null;
+		throw new NotYetImplementedException();
 	}
 	
 	@SneakyThrows

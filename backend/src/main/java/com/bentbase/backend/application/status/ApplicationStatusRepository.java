@@ -1,4 +1,4 @@
-package com.bentbase.backend.tag;
+package com.bentbase.backend.application.status;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -8,14 +8,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface TagRepository extends JpaRepository<Tag, Long>, JpaSpecificationExecutor<Tag> {
+public interface ApplicationStatusRepository extends JpaRepository<ApplicationStatus, Long>, JpaSpecificationExecutor<ApplicationStatus> {
 	
 	@Override
-	Page<Tag> findAll(Pageable pageable);
+	Page<ApplicationStatus> findAll(Pageable pageable);
 	
-	Optional<Tag> findById(Long id);
+	@Override
+	Optional<ApplicationStatus> findById(Long id);
 	
-	Optional<Tag> findByName(String name);
+	Optional<ApplicationStatus> findByName(String name);
 	
 	@Transactional
 	void deleteByName(String name);

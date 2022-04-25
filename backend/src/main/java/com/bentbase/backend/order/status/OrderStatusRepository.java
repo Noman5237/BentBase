@@ -1,23 +1,23 @@
-package com.bentbase.backend.order;
+package com.bentbase.backend.order.status;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-@Repository
-public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecificationExecutor<Order> {
+public interface OrderStatusRepository extends JpaRepository<OrderStatus, Long>, JpaSpecificationExecutor<OrderStatus> {
 	
 	@Override
-	Page<Order> findAll(Pageable pageable);
+	Page<OrderStatus> findAll(Pageable pageable);
 	
 	@Override
-	Optional<Order> findById(Long id);
+	Optional<OrderStatus> findById(Long id);
+	
+	Optional<OrderStatus> findByName(String name);
 	
 	@Transactional
-	void deleteById(Long id);
+	void deleteByName(String name);
 }

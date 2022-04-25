@@ -26,7 +26,5 @@ public interface SellerService {
 	
 	Seller updateSeller(Map<String, Object> properties);
 	
-	void applyForProject(Project project);
-	
 	void deleteSellerByEmail(String email);
 }

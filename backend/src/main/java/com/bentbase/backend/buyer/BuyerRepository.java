@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface BuyerRepository extends JpaRepository<Buyer, String>, JpaSpecificationExecutor<Seller> {
+public interface BuyerRepository extends JpaRepository<Buyer, String>, JpaSpecificationExecutor<Buyer> {
 	
 	@Override
 	Page<Buyer> findAll(Pageable pageable);
