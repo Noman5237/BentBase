@@ -18,6 +18,8 @@ public interface ProjectService {
 	
 	Page<Application> getApplications(Long id, Paginate paginate);
 	
+	Page<Tag> getTags(Long projectId, Paginate paginate);
+	
 	Project createProject(Project project);
 	
 	Project updateProject(Map<String, Object> properties);

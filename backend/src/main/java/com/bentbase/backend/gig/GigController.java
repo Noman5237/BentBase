@@ -1,11 +1,9 @@
 package com.bentbase.backend.gig;
 
-import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -57,15 +55,14 @@ public class GigController {
 	}
 	
 	@GetMapping ("/{id}/tags")
-	public List<Tag> getAllTags(@PathVariable ("id") Long id,
-	                            @RequestParam (defaultValue = "0") int page,
-	                            @RequestParam (defaultValue = "10") int size,
-	                            @RequestParam (required = false, defaultValue = "name,asc") String[] sorts) {
+	public Map<String, Object> getAllTags(@PathVariable ("id") Long id,
+	                                      @RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "name,asc") String[] sorts) {
 		
 		var tagsPage = gigService.getTags(id, new PageUtil.Paginate(page, size, sorts));
-
-//		return PageUtil.createResponseWithPaginatedMeta(tagsPage);
-		return tagsPage;
+		
+		return PageUtil.createResponseWithPaginatedMeta(tagsPage);
 	}
 	
 	@PostMapping ("/create")

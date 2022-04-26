@@ -42,6 +42,17 @@ public class ProjectController {
 		return PageUtil.createResponseWithPaginatedMeta(educationsPage);
 	}
 	
+	@GetMapping ("/{id}/tags")
+	public Map<String, Object> getAllTags(@PathVariable ("id") Long id,
+	                                      @RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "name,asc") String[] sorts) {
+		
+		var tagsPage = projectService.getTags(id, new PageUtil.Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(tagsPage);
+	}
+	
 	@PostMapping ("/create")
 	public Project createProject(@RequestBody Project project) {
 		return projectService.createProject(project);

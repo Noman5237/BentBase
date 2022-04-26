@@ -21,7 +21,7 @@ public interface GigService {
 	
 	Page<Experience> getExperiences(Long gigId, Paginate paginate);
 	
-	List<Tag> getTags(Long gigId, Paginate paginate);
+	Page<Tag> getTags(Long gigId, Paginate paginate);
 	
 	Gig createGig(Gig gig);
 	

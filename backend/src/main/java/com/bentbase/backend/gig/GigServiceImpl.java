@@ -88,12 +88,12 @@ public class GigServiceImpl implements GigService {
 	
 	@SneakyThrows
 	@Override
-	public List<Tag> getTags(Long gigId, Paginate paginate) {
+	public Page<Tag> getTags(Long gigId, Paginate paginate) {
 		this.getGigById(gigId);
 		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
 		                                        paginate.getSize(),
 		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
-		return gigRepository.getAllTags(gigId);
+		return gigRepository.getAllTags(gigId, pagingSort);
 	}
 	
 	@SneakyThrows

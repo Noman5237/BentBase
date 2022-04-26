@@ -30,8 +30,8 @@ public interface GigRepository extends JpaRepository<Gig, Long>, JpaSpecificatio
 	@Query ("select experience from Experience experience where experience.gigId = :id")
 	Page<Experience> getAllExperiences(@Param ("id") Long gigId, Pageable pageable);
 	
-	@Query ("select tag from Tag tag inner join GigTag gig_tag on tag.id= gig_tag.id.tagId and gig_tag.id.gigId= :gig_id")
-	List<Tag> getAllTags(@Param ("gig_id") Long gigId);
+	@Query ("select tag from Tag tag inner join GigTag gig_tag on tag.id = gig_tag.id.tagId and gig_tag.id.gigId = :gig_id")
+	Page<Tag> getAllTags(@Param ("gig_id") Long gigId, Pageable pageable);
 	
 	@Override
 	@Transactional

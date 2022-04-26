@@ -76,6 +76,16 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@SneakyThrows
 	@Override
+	public Page<Tag> getTags(Long projectId, Paginate paginate) {
+		this.getProjectById(projectId);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
+		return projectRepository.getAllTags(projectId, pagingSort);
+	}
+	
+	@SneakyThrows
+	@Override
 	public Project createProject(Project project) {
 		try {
 			return projectRepository.save(project);
