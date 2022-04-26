@@ -4,10 +4,10 @@ module.exports = {
 		es2021: true,
 	},
 	extends: [
-		'eslint:recommended',
-		'plugin:react/recommended',
-		'plugin:react-hooks/recommended',
-		'plugin:prettier/recommended',
+		// 'eslint:recommended',
+		// 'plugin:react/recommended',
+		// 'plugin:react-hooks/recommended',
+		// 'plugin:prettier/recommended',
 	],
 	parserOptions: {
 		ecmaFeatures: {
@@ -18,10 +18,10 @@ module.exports = {
 	},
 	plugins: ['react'],
 	rules: {
-		'prettier/prettier': 'error',
-		'react/function-component-definition': [
-			2,
-			{ namedComponents: 'arrow-function' },
-		],
+		// 'prettier/prettier': 'error',
+		// 'react/function-component-definition': [
+		// 	2,
+		// 	{ namedComponents: 'arrow-function' },
+		//	],
 	},
 };
