@@ -36,7 +36,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public Page<Admin> getAllAdmins(Paginate paginate) {
 		try {
-			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
+			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Admin.class));
 			return adminRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new GetException(Admin.class, exception);

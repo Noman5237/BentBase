@@ -13,10 +13,12 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@SequenceGenerator (name = "project_id_generator", sequenceName = "project_id_sequence", allocationSize = 1)
 @Table (name = "project")
 public class Project {
 	
 	@Id
+	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "project_id_generator")
 	@Column (nullable = false)
 	private Long id;
 	

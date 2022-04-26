@@ -45,5 +45,5 @@ public class Order {
 	private Long projectId;
 	
 	@Column
-	private Long orderStatus;
+	private Long status;
 }

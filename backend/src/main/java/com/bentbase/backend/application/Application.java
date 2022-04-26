@@ -41,8 +41,4 @@ public class Application {
 	@Column
 	@NotNull
 	private Long projectId;
-	
-	@Column
-	@NotNull
-	private Long applicationStatus;
 }

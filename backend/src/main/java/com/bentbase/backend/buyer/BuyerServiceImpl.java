@@ -37,7 +37,7 @@ public class BuyerServiceImpl implements BuyerService {
 	@Override
 	public Page<Buyer> getAllBuyers(Paginate paginate) {
 		try {
-			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), User.class));
+			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Buyer.class));
 			return buyerRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new GetException(Buyer.class, exception);
