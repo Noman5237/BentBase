@@ -20,7 +20,9 @@ public interface GigService {
 	Page<Education> getEducations(Long gigId, Paginate paginate);
 	
 	Page<Experience> getExperiences(Long gigId, Paginate paginate);
-
+	
+	List<Tag> getTags(Long gigId, Paginate paginate);
+	
 	Gig createGig(Gig gig);
 	
 	Gig updateGig(Map<String, Object> properties);

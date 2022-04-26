@@ -1,9 +1,6 @@
 package com.bentbase.backend.gig.education;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
 @SequenceGenerator (name = "education_id_generator", sequenceName = "education_id_sequence", allocationSize = 1)
 @Table (name = "education")

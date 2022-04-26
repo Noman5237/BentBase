@@ -1,9 +1,6 @@
 package com.bentbase.backend.gig.tag;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
@@ -13,6 +10,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Entity
 @Table (name = "gig_tag")
 public class GigTag {

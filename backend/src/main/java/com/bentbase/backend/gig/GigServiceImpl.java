@@ -39,7 +39,9 @@ public class GigServiceImpl implements GigService {
 	@Override
 	public Page<Gig> getAllGigs(Paginate paginate) {
 		try {
-			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Gig.class));
+			PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+			                                        paginate.getSize(),
+			                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Gig.class));
 			return gigRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new GetException(Gig.class, exception);
@@ -66,7 +68,10 @@ public class GigServiceImpl implements GigService {
 	@Override
 	public Page<Education> getEducations(Long gigId, Paginate paginate) {
 		this.getGigById(gigId);
-		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Education.class));
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(),
+		                                                                          Education.class));
 		return gigRepository.getAllEducations(gigId, pagingSort);
 	}
 	
@@ -74,8 +79,21 @@ public class GigServiceImpl implements GigService {
 	@Override
 	public Page<Experience> getExperiences(Long gigId, Paginate paginate) {
 		this.getGigById(gigId);
-		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Experience.class));
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(),
+		                                                                          Experience.class));
 		return gigRepository.getAllExperiences(gigId, pagingSort);
+	}
+	
+	@SneakyThrows
+	@Override
+	public List<Tag> getTags(Long gigId, Paginate paginate) {
+		this.getGigById(gigId);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
+		return gigRepository.getAllTags(gigId);
 	}
 	
 	@SneakyThrows

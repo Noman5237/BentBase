@@ -1,13 +1,11 @@
 package com.bentbase.backend.gig.tag;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -15,6 +13,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 @Embeddable
 public class GigTagId implements Serializable {
 	
