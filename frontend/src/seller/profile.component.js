@@ -12,9 +12,10 @@ return (
             </div>
             </li>
             <li><a className="active" href="#home">Home</a></li>
-            <li><a href="#">Gigs</a></li>
+            <li><a href="/Gigs">Gigs</a></li>
             <li><a href="#">Earning</a></li>
             <li><a href="#">Orders</a></li>
+            <li><a href='#'>Reviews</a></li>
         </ul>
         <div className='container emp-profile' class='center'>
             <form method="">
@@ -34,6 +35,7 @@ return (
                 </div>
             </form>
         </div>
+
     </>
 )
 
