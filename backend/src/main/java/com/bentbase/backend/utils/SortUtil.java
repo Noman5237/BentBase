@@ -20,19 +20,28 @@ public class SortUtil {
 			sorts[0] = String.format("%s,%s", temp[0], temp[1]);
 		}
 		
-		var declaredFields = Arrays.stream(context.getDeclaredFields())
-		                           .map(Field::getName)
-		                           .collect(Collectors.toSet());
 		var undefinedFields = new ArrayList<String>();
+		
 		for (String sort : sorts) {
+			Class<?> targetClass = context;
 			String[] _sort = sort.split(",");
-			
-			if (!declaredFields.contains(_sort[0])) {
-				undefinedFields.add(_sort[0]);
-				continue;
+			while (targetClass != Object.class) {
+				var declaredFields = Arrays.stream(targetClass.getDeclaredFields())
+				                           .map(Field::getName)
+				                           .collect(Collectors.toSet());
+				
+				if (!declaredFields.contains(_sort[0])) {
+					targetClass = targetClass.getSuperclass();
+					continue;
+				}
+				
+				orders.add(new Order(Direction.fromString(_sort[1].toUpperCase()), _sort[0]));
+				break;
 			}
 			
-			orders.add(new Order(Direction.fromString(_sort[1].toUpperCase()), _sort[0]));
+			if (targetClass == Object.class) {
+				undefinedFields.add(_sort[0]);
+			}
 		}
 		
 		if (undefinedFields.size() > 0) {

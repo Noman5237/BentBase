@@ -1,28 +1,22 @@
 package com.bentbase.backend.seller;
 
-import com.bentbase.backend.gig.Gig;
-import com.bentbase.backend.user.rest.User;
-import lombok.*;
+import com.bentbase.backend.user.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Builder
 @Getter
 @Setter
+@ToString
 @Entity
 @Table (name = "seller")
-public class Seller {
-	
-	@Id
-	@Column (nullable = false)
-	private String userEmail;
-	
-	@OneToOne (optional = false, orphanRemoval = true)
-	@JoinColumn (name = "user_email", nullable = false)
-	private User user;
-	
-	
+@PrimaryKeyJoinColumn (name = "user_email")
+public class Seller extends User {
+
 }

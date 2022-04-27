@@ -1,6 +1,6 @@
 package com.bentbase.backend.review;
 
-import com.bentbase.backend.user.rest.User;
+import com.bentbase.backend.user.User;
 import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
 

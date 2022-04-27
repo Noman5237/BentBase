@@ -4,13 +4,17 @@ package com.bentbase.backend.gig.experience;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 
+import java.util.Map;
+
 public interface ExperienceService {
 	
 	Page<Experience> getAllExperiences(Paginate paginate);
 	
-	Experience getExperienceById(String id);
+	Experience getExperienceById(Long id);
 	
-	Experience updateExperience(Experience experience);
+	Experience createExperience(Experience experience);
 	
-	void deleteExperienceById(String id);
+	Experience updateExperience(Map<String, Object> properties);
+	
+	void deleteExperienceById(Long id);
 }
