@@ -2,8 +2,10 @@ package com.bentbase.backend.seller;
 
 import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Map;
 
 @RestController
@@ -54,9 +56,11 @@ public class SellerController {
 		return PageUtil.createResponseWithPaginatedMeta(applicationsPage);
 	}
 	
-	@GetMapping ("/{email}/totalEarning")
-	public Number getTotalEarning(@PathVariable ("email") String email) {
-		return sellerService.getTotalEarning(email);
+	@GetMapping ("/totalEarning")
+	public Long getTotalEarning(@RequestParam String sellerEmail,
+	                            @RequestParam @DateTimeFormat (pattern = "dd-MMM-yyyy") Date startDate,
+	                            @RequestParam @DateTimeFormat (pattern = "dd-MMM-yyyy") Date endDate) {
+		return sellerService.getTotalEarning(sellerEmail, startDate, endDate);
 	}
 	
 	@PostMapping ("/create")

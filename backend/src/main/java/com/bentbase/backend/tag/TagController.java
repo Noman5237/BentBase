@@ -17,7 +17,9 @@ public class TagController {
 	}
 	
 	@GetMapping ()
-	public Map<String, Object> getAllTags(@RequestParam (defaultValue = "0") int page, @RequestParam (defaultValue = "10") int size, @RequestParam (required = false, defaultValue = "name,asc") String[] sorts) {
+	public Map<String, Object> getAllTags(@RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "name,asc") String[] sorts) {
 		
 		Page<Tag> usersPage = tagService.getAllTags(new PageUtil.Paginate(page, size, sorts));
 		
@@ -32,6 +34,16 @@ public class TagController {
 	@GetMapping ("/name/{name}")
 	public Tag getTagByName(@PathVariable ("name") String name) {
 		return tagService.getTagByName(name);
+	}
+	
+	@GetMapping ("/search")
+	public Map<String, Object> searchTags(@RequestParam String query,
+	                                      @RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "name,asc") String[] sorts) {
+		Page<Tag> usersPage = tagService.searchTags(query, new PageUtil.Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(usersPage);
 	}
 	
 	@PostMapping ("/create")

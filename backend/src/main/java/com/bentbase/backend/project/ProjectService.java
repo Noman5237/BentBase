@@ -5,7 +5,6 @@ import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
 import java.util.Map;
 
 public interface ProjectService {
@@ -14,7 +13,7 @@ public interface ProjectService {
 	
 	Project getProjectById(Long id);
 	
-	Page<Project> searchProjects(String title, List<Tag> tags, Paginate paginate);
+	Page<Project> filterProjects(String title, String[] includedTags, Paginate paginate);
 	
 	Page<Application> getApplications(Long id, Paginate paginate);
 	

@@ -19,6 +19,7 @@ import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
+import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
@@ -80,8 +81,8 @@ public class SellerServiceImpl implements SellerService {
 	}
 	
 	@Override
-	public Number getTotalEarning(String email) {
-		return sellerRepository.getTotalEarning(email);
+	public Long getTotalEarning(String email, Date startDate, Date endDate) {
+		return sellerRepository.getTotalEarning(email, startDate, endDate);
 	}
 	
 	@SneakyThrows

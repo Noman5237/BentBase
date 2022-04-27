@@ -37,7 +37,9 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public Page<Tag> getAllTags(PageUtil.Paginate paginate) {
 		try {
-			PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize(), SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
+			PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+			                                        paginate.getSize(),
+			                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
 			return tagRepository.findAll(pagingSort);
 		} catch (RESTException exception) {
 			throw new GetException(Tag.class, exception);
@@ -66,9 +68,13 @@ public class TagServiceImpl implements TagService {
 		return tag.get();
 	}
 	
+	@SneakyThrows
 	@Override
 	public Page<Tag> searchTags(String query, PageUtil.Paginate paginate) {
-		throw new NotYetImplementedException();
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
+		return tagRepository.searchTags(query, pagingSort);
 	}
 	
 	@SneakyThrows
@@ -90,12 +96,12 @@ public class TagServiceImpl implements TagService {
 	@Override
 	public Tag updateTag(Map<String, Object> properties) {
 		if (!properties.containsKey("id") && !properties.containsKey("name")) {
-			throw new GetException(Tag.class)
-					.withError("id", "must not be blank")
-					.withError("name", "must not be blank");
+			throw new GetException(Tag.class).withError("id", "must not be blank")
+			                                 .withError("name", "must not be blank");
 		}
 		
-		var tag = properties.containsKey("id") ? getTagById(Long.valueOf((Integer) properties.get("id"))) : getTagByName((String) properties.get("name"));
+		var tag = properties.containsKey("id") ? getTagById(Long.valueOf((Integer) properties.get("id"))) : getTagByName(
+				(String) properties.get("name"));
 		
 		try {
 			PatchUtil.update(tag, properties);

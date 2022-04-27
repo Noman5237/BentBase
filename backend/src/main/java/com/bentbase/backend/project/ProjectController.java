@@ -53,6 +53,17 @@ public class ProjectController {
 		return PageUtil.createResponseWithPaginatedMeta(tagsPage);
 	}
 	
+	@GetMapping ("/filter")
+	public Map<String, Object> filterProjects(@RequestParam String title,
+	                                          @RequestParam String[] tags,
+	                                          @RequestParam (defaultValue = "0") int page,
+	                                          @RequestParam (defaultValue = "10") int size) {
+		
+		var projectsPage = projectService.filterProjects(title, tags, new PageUtil.Paginate(page, size, null));
+		
+		return PageUtil.createResponseWithPaginatedMeta(projectsPage);
+	}
+	
 	@PostMapping ("/create")
 	public Project createProject(@RequestBody Project project) {
 		return projectService.createProject(project);

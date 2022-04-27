@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.Optional;
 
 @Repository
@@ -29,8 +30,10 @@ public interface SellerRepository extends JpaRepository<Seller, String>, JpaSpec
 	@Query ("select a from Application a where a.sellerEmail = :email")
 	Page<Application> getAllApplications(@Param ("email") String email, Pageable pageable);
 	
-	@Query (nativeQuery = true, value = "select totalEarning(:email) from dual")
-	BigDecimal getTotalEarning(@Param ("email") String email);
+	@Query (nativeQuery = true, value = "select p_seller.get_total_earning(:seller_email, :start_date, :end_date) from dual")
+	Long getTotalEarning(@Param ("seller_email") String seller_email,
+	                     @Param ("start_date") Date startDate,
+	                     @Param ("end_date") Date endDate);
 	
 	@Transactional
 	void deleteByEmail(String email);

@@ -7,6 +7,7 @@ import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Map;
 
 @Service
@@ -20,7 +21,7 @@ public interface SellerService {
 	
 	Page<Application> getApplications(String email, Paginate paginate);
 	
-	Number getTotalEarning(String email);
+	Long getTotalEarning(String email, Date startDate, Date endDate);
 	
 	Seller createSeller(Seller seller);
 	

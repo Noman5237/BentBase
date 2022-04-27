@@ -6,7 +6,7 @@ import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Map;
 
 public interface GigService {
@@ -15,13 +15,15 @@ public interface GigService {
 	
 	Gig getGigById(Long id);
 	
-	Page<Gig> searchGigs(String title, List<Tag> tags, Paginate paginate);
-	
 	Page<Education> getEducations(Long gigId, Paginate paginate);
 	
 	Page<Experience> getExperiences(Long gigId, Paginate paginate);
 	
 	Page<Tag> getTags(Long gigId, Paginate paginate);
+	
+	Long getTotalEarning(Long gigId, Date startDate, Date endDate);
+	
+	Page<Gig> filterGigs(String title, String[] includedTags, Paginate paginate);
 	
 	Gig createGig(Gig gig);
 	

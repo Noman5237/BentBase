@@ -18,6 +18,7 @@ import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -59,11 +60,6 @@ public class GigServiceImpl implements GigService {
 		return gig.get();
 	}
 	
-	@Override
-	public Page<Gig> searchGigs(String title, List<Tag> tags, Paginate paginate) {
-		return null;
-	}
-	
 	@SneakyThrows
 	@Override
 	public Page<Education> getEducations(Long gigId, Paginate paginate) {
@@ -94,6 +90,19 @@ public class GigServiceImpl implements GigService {
 		                                        paginate.getSize(),
 		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
 		return gigRepository.getAllTags(gigId, pagingSort);
+	}
+	
+	@Override
+	public Long getTotalEarning(Long gigId, Date startDate, Date endDate) {
+		this.getGigById(gigId);
+		return gigRepository.getTotalEarning(gigId, startDate, endDate);
+	}
+	
+	@Override
+	public Page<Gig> filterGigs(String title, String[] includedTags, Paginate paginate) {
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize());
+		
+		return gigRepository.filterGigs(title, includedTags, pagingSort);
 	}
 	
 	@SneakyThrows

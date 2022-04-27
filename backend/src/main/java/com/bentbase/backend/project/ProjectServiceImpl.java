@@ -60,8 +60,10 @@ public class ProjectServiceImpl implements ProjectService {
 	}
 	
 	@Override
-	public Page<Project> searchProjects(String title, List<Tag> tags, Paginate paginate) {
-		return null;
+	public Page<Project> filterProjects(String title, String[] includedTags, Paginate paginate) {
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize());
+		
+		return projectRepository.filterProjects(title, includedTags, pagingSort);
 	}
 	
 	@SneakyThrows

@@ -18,10 +18,9 @@ public class UserController {
 	}
 	
 	@GetMapping ()
-	public Map<String, Object> getAllUsers(
-			@RequestParam (defaultValue = "0") int page,
-			@RequestParam (defaultValue = "10") int size,
-			@RequestParam (required = false, defaultValue = "email,asc") String[] sorts) {
+	public Map<String, Object> getAllUsers(@RequestParam (defaultValue = "0") int page,
+	                                       @RequestParam (defaultValue = "10") int size,
+	                                       @RequestParam (required = false, defaultValue = "email,asc") String[] sorts) {
 		
 		Page<User> usersPage = userService.getAllUsers(new Paginate(page, size, sorts));
 		
@@ -31,6 +30,16 @@ public class UserController {
 	@GetMapping ("/{email}")
 	public User getUserByEmail(@PathVariable ("email") String email) {
 		return userService.getUserByEmail(email);
+	}
+	
+	@PostMapping ("/filter")
+	public Map<String, Object> filterUsers(@RequestBody User filter,
+	                                       @RequestParam (defaultValue = "0") int page,
+	                                       @RequestParam (defaultValue = "10") int size) {
+		
+		Page<User> usersPage = userService.filterUsers(filter, new Paginate(page, size, null));
+		
+		return PageUtil.createResponseWithPaginatedMeta(usersPage);
 	}
 	
 	@PatchMapping ("/update")

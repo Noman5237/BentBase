@@ -2,8 +2,11 @@ package com.bentbase.backend.gig;
 
 import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,10 +20,9 @@ public class GigController {
 	}
 	
 	@GetMapping ()
-	public Map<String, Object> getAllGigs(
-			@RequestParam (defaultValue = "0") int page,
-			@RequestParam (defaultValue = "10") int size,
-			@RequestParam (required = false, defaultValue = "id,asc") String[] sorts) {
+	public Map<String, Object> getAllGigs(@RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "id,asc") String[] sorts) {
 		
 		Page<Gig> gigsPage = gigService.getAllGigs(new PageUtil.Paginate(page, size, sorts));
 		
@@ -63,6 +65,24 @@ public class GigController {
 		var tagsPage = gigService.getTags(id, new PageUtil.Paginate(page, size, sorts));
 		
 		return PageUtil.createResponseWithPaginatedMeta(tagsPage);
+	}
+	
+	@GetMapping ("/totalEarning")
+	public Long getTotalEarning(@RequestParam Long gigId,
+	                            @RequestParam @DateTimeFormat (pattern = "dd-MMM-yyyy") Date startDate,
+	                            @RequestParam @DateTimeFormat (pattern = "dd-MMM-yyyy") Date endDate) {
+		return gigService.getTotalEarning(gigId, startDate, endDate);
+	}
+	
+	@GetMapping ("/filter")
+	public Map<String, Object> filterGigs(@RequestParam String title,
+	                                      @RequestParam String[] tags,
+	                                      @RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size) {
+		
+		var gigsPage = gigService.filterGigs(title, tags, new PageUtil.Paginate(page, size, null));
+		
+		return PageUtil.createResponseWithPaginatedMeta(gigsPage);
 	}
 	
 	@PostMapping ("/create")

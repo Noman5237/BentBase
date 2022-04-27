@@ -1,25 +1,22 @@
 package com.bentbase.backend.user;
 
 import com.bentbase.backend.core.exception.RESTException;
-import com.bentbase.backend.core.exception.generic.CreateException;
 import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
-import com.bentbase.backend.review.Review;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
 import lombok.SneakyThrows;
-import org.hibernate.cfg.NotYetImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 
 import java.util.Map;
 import java.util.Optional;
+
+import static com.bentbase.backend.user.UserSpecifications.filterBy;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -58,6 +55,14 @@ public class UserServiceImpl implements UserService {
 	
 	@SneakyThrows
 	@Override
+	public Page<User> filterUsers(User filter, Paginate paginate) {
+		PageRequest pagination = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize());
+		return userRepository.findAll(filterBy(filter), pagination);
+	}
+	
+	@SneakyThrows
+	@Override
 	public User updateUser(Map<String, Object> properties) {
 		if (!properties.containsKey("email")) {
 			throw new GetException(User.class).withError("email", "must not be blank");
@@ -78,11 +83,6 @@ public class UserServiceImpl implements UserService {
 	public void deleteUserByEmail(String email) {
 		this.getUserByEmail(email);
 		userRepository.deleteByEmail(email);
-	}
-	
-	@Override
-	public void postReview(Review review) {
-		throw new NotYetImplementedException();
 	}
 	
 }
