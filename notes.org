@@ -1,0 +1,32 @@
+* Features
+** CRUD Operations for all entities
+*** generic exception controller advice for create, read and update operations 
+*** CONSTRAINT VALIDATION, INVALID ATTRIBUTE and NON EXISTENT ID EXCEPTION handlers integrated
+*** validation against illegal values in read and delete operations
+*** validation against illegal keys in create and update operations
+** Usage of sequence and generators for automatically generating ids
+** User
+*** buyer, seller and admin inherits from user, so they all follow the same dto
+*** update operation allows fields from parent class
+*** creation of buyer, seller or admin with new email automatically creates entries in user table
+*** filtering users using first name and last name through dynamically building queries using phonetic and ordered by edit distance algorithm
+** Tag
+*** tags can searched by name
+*** filtering tags supports fuzzy searching
+** Gig
+*** gig can be filtered using title and tags (OR)
+*** total earning of the gig can be calculated in a range of days from completed orders
+** Seller
+*** total earning of the sellers calculated through the earnings of the gigs
+** Project
+*** projects can be filtered using title and tags just like gigs
+** Order
+*** Order connects the projects and gigs and provide financial support to the system
+*** The earnings are calculated when orders are completed
+** Status
+*** project and orders supports status
+** Planned Improvements
+*** Advanced filters after implementing custom DTO for entities
+*** Irreversible and linear transactions of order and its status
+*** More services using 2nd degree and 3rd degree relations
+*** Review system
