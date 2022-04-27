@@ -1,3 +1,7 @@
+.center {
+  text-align: center;
+  border: 3px solid green;
+}
 ul {
   list-style-type: none;
   margin: 0;
@@ -14,7 +18,7 @@ li a {
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 18px 16px;
   text-decoration: none;
 }
 
@@ -24,11 +28,12 @@ li a:hover {
 }
 
 li .logo-image{
-  /* width: 46px;
-  height: 46px;
-  overflow: hidden; 
+  width: 150px;
+  height: 100px; 
+}
+li .logo-image .center {
+  display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
-  display: block; */
 }

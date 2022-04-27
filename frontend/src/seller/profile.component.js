@@ -5,19 +5,18 @@ import logo from './images/logo.png'
 const profile = () => {
 return (
     <>
-        <div className='container emp-profile'>
         <ul>
             <li>
-            <div class="logo-image">
-                <img src={logo}  class="img-fluid"/>
+            <div className="logo-image">
+                <img src={logo}  className="img-thumbnail" class="center"/>
             </div>
             </li>
-            <li><a class="active" href="#home">Home</a></li>
+            <li><a className="active" href="#home">Home</a></li>
             <li><a href="#">Gigs</a></li>
             <li><a href="#">Earning</a></li>
             <li><a href="#">Orders</a></li>
         </ul>
-
+        <div className='container emp-profile' class='center'>
             <form method="">
                 <div className='row'>
                     <div className='col-md-4'>
@@ -26,8 +25,8 @@ return (
 
                     <div className="col-md-6">
                         <div className="profile-head">
-                            <h5>Abdullah Al Noman</h5>
-                            <h6>Web Developer</h6>
+                            <h2>Abdullah Al Noman</h2>
+                            <h3>Web Developer</h3>
                             <p className='profile-rating mt-3 mb-5'>Rating <span> 1/10 </span></p>
                         </div>
                     </div>
