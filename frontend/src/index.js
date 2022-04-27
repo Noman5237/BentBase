@@ -12,12 +12,3 @@ ReactDOM.render(
 	</React.StrictMode>,
 	document.getElementById('root')
 );
-import {
-    Nav,
-    NavLogo,
-    NavLink,
-    Bars,
-    NavMenu,
-    NavBtn,
-    NavBtnLink,
-} from ".sellers/NavbarElements";
