@@ -6,6 +6,7 @@ import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
 import com.bentbase.backend.gig.education.Education;
 import com.bentbase.backend.gig.experience.Experience;
+import com.bentbase.backend.order.Order;
 import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
@@ -92,8 +93,18 @@ public class GigServiceImpl implements GigService {
 		return gigRepository.getAllTags(gigId, pagingSort);
 	}
 	
+	@SneakyThrows
 	@Override
-	public Long getTotalEarning(Long gigId, Date startDate, Date endDate) {
+	public Page<Order> getOrders(Long gigId, Paginate paginate) {
+		this.getGigById(gigId);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Order.class));
+		return gigRepository.getAllOrders(gigId, pagingSort);
+	}
+	
+	@Override
+	public Long getEarning(Long gigId, Date startDate, Date endDate) {
 		this.getGigById(gigId);
 		return gigRepository.getTotalEarning(gigId, startDate, endDate);
 	}

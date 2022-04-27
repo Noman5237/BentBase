@@ -6,7 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -67,11 +66,22 @@ public class GigController {
 		return PageUtil.createResponseWithPaginatedMeta(tagsPage);
 	}
 	
+	@GetMapping ("/{id}/orders")
+	public Map<String, Object> getAllOrders(@PathVariable ("id") Long id,
+	                                      @RequestParam (defaultValue = "0") int page,
+	                                      @RequestParam (defaultValue = "10") int size,
+	                                      @RequestParam (required = false, defaultValue = "id,asc") String[] sorts) {
+		
+		var ordersPage = gigService.getOrders(id, new PageUtil.Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(ordersPage);
+	}
+	
 	@GetMapping ("/totalEarning")
 	public Long getTotalEarning(@RequestParam Long gigId,
 	                            @RequestParam @DateTimeFormat (pattern = "dd-MMM-yyyy") Date startDate,
 	                            @RequestParam @DateTimeFormat (pattern = "dd-MMM-yyyy") Date endDate) {
-		return gigService.getTotalEarning(gigId, startDate, endDate);
+		return gigService.getEarning(gigId, startDate, endDate);
 	}
 	
 	@GetMapping ("/filter")

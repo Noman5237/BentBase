@@ -2,6 +2,7 @@ package com.bentbase.backend.gig;
 
 import com.bentbase.backend.gig.education.Education;
 import com.bentbase.backend.gig.experience.Experience;
+import com.bentbase.backend.order.Order;
 import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,9 @@ public interface GigService {
 	
 	Page<Tag> getTags(Long gigId, Paginate paginate);
 	
-	Long getTotalEarning(Long gigId, Date startDate, Date endDate);
+	Page<Order> getOrders(Long gigId, Paginate paginate);
+	
+	Long getEarning(Long gigId, Date startDate, Date endDate);
 	
 	Page<Gig> filterGigs(String title, String[] includedTags, Paginate paginate);
 	

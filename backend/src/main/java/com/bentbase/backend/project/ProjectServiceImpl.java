@@ -5,6 +5,7 @@ import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.core.exception.generic.CreateException;
 import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
+import com.bentbase.backend.order.Order;
 import com.bentbase.backend.tag.Tag;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
@@ -59,13 +60,6 @@ public class ProjectServiceImpl implements ProjectService {
 		return project.get();
 	}
 	
-	@Override
-	public Page<Project> filterProjects(String title, String[] includedTags, Paginate paginate) {
-		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize());
-		
-		return projectRepository.filterProjects(title, includedTags, pagingSort);
-	}
-	
 	@SneakyThrows
 	@Override
 	public Page<Application> getApplications(Long id, Paginate paginate) {
@@ -84,6 +78,23 @@ public class ProjectServiceImpl implements ProjectService {
 		                                        paginate.getSize(),
 		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Tag.class));
 		return projectRepository.getAllTags(projectId, pagingSort);
+	}
+	
+	@SneakyThrows
+	@Override
+	public Page<Order> getOrders(Long projectId, Paginate paginate) {
+		this.getProjectById(projectId);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Order.class));
+		return projectRepository.getAllOrders(projectId, pagingSort);
+	}
+	
+	@Override
+	public Page<Project> filterProjects(String title, String[] includedTags, Paginate paginate) {
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(), paginate.getSize());
+		
+		return projectRepository.filterProjects(title, includedTags, pagingSort);
 	}
 	
 	@SneakyThrows

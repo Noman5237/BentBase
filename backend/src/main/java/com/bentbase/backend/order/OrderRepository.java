@@ -19,8 +19,6 @@ public interface OrderRepository extends JpaRepository<Order, Long>, JpaSpecific
 	@Override
 	Optional<Order> findById(Long id);
 	
-	Page<Order> findAllByGigId(Long gigId, Pageable pageable);
-	
 	@Transactional
 	void deleteById(Long id);
 }
