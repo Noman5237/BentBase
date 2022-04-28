@@ -18,14 +18,6 @@ public class ProjectTagServiceImpl implements ProjectTagService {
 	}
 	
 	@Override
-	public Page<Project> getProjectsByTags(List<String> includingTagNames,
-	                               List<String> excludingTagNames,
-	                               PageUtil.Paginate paginate) {
-		
-		throw new NotYetImplementedException();
-	}
-	
-	@Override
 	public ProjectTag createProjectTag(ProjectTag projectTag) {
 		return projectTagRepository.save(projectTag);
 	}

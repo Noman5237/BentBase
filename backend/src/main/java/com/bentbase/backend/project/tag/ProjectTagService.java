@@ -10,8 +10,6 @@ import java.util.List;
 @Service
 public interface ProjectTagService {
 	
-	Page<Project> getProjectsByTags(List<String> includingTagNames, List<String> excludingTagNames, Paginate paginate);
-	
 	ProjectTag createProjectTag(ProjectTag projectTag);
 	
 	void deleteProjectTagById(ProjectTagId projectTagId);

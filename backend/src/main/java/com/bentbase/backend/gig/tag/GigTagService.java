@@ -10,8 +10,6 @@ import java.util.List;
 @Service
 public interface GigTagService {
 	
-	Page<Gig> getGigsByTags(List<String> includingTagNames, List<String> excludingTagNames, Paginate paginate);
-	
 	GigTag createGigTag(GigTag gigTag);
 	
 	void deleteGigTagById(GigTagId gigTagId);

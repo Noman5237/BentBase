@@ -1,16 +1,14 @@
 package com.bentbase.backend.review;
 
-import com.bentbase.backend.user.User;
-import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
+
+import static com.bentbase.backend.utils.PageUtil.Paginate;
 
 public interface ReviewService {
 	
-	Page<Review> getAllReviews(PageUtil.Paginate paginate);
+	Page<Review> getAllReviews(Paginate paginate);
 	
-	Review getReviewById(String id);
-	
-	Page<Review> getReviewsOf(User user, PageUtil.Paginate paginate);
+	Review getReviewById(Long id);
 	
 	Review createReview(Review review);
 	

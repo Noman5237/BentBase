@@ -1,5 +1,6 @@
 package com.bentbase.backend.user;
 
+import com.bentbase.backend.review.Review;
 import com.bentbase.backend.utils.PageUtil;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,28 @@ public class UserController {
 	@GetMapping ("/{email}")
 	public User getUserByEmail(@PathVariable ("email") String email) {
 		return userService.getUserByEmail(email);
+	}
+	
+	@GetMapping ("/{email}/providedReviews")
+	public Map<String, Object> getAllProvidedReviews(@PathVariable ("email") String email,
+	                                                 @RequestParam (defaultValue = "0") int page,
+	                                                 @RequestParam (defaultValue = "10") int size,
+	                                                 @RequestParam (required = false, defaultValue = "rating,desc") String[] sorts) {
+		
+		Page<Review> reviewPage = userService.getProvidedReviews(email, new Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(reviewPage);
+	}
+	
+	@GetMapping ("/{email}/receivedReviews")
+	public Map<String, Object> getAllReceivedReviews(@PathVariable ("email") String email,
+	                                                 @RequestParam (defaultValue = "0") int page,
+	                                                 @RequestParam (defaultValue = "10") int size,
+	                                                 @RequestParam (required = false, defaultValue = "rating,desc") String[] sorts) {
+		
+		Page<Review> reviewPage = userService.getReceivedReviews(email, new Paginate(page, size, sorts));
+		
+		return PageUtil.createResponseWithPaginatedMeta(reviewPage);
 	}
 	
 	@PostMapping ("/filter")

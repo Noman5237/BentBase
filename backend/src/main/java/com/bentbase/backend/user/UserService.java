@@ -1,5 +1,6 @@
 package com.bentbase.backend.user;
 
+import com.bentbase.backend.review.Review;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,10 @@ public interface UserService {
 	Page<User> getAllUsers(Paginate paginate);
 	
 	User getUserByEmail(String email);
+	
+	Page<Review> getProvidedReviews(String email, Paginate paginate);
+	
+	Page<Review> getReceivedReviews(String email, Paginate paginate);
 	
 	Page<User> filterUsers(User filter, Paginate paginate);
 	

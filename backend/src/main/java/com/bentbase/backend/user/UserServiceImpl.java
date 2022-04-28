@@ -3,6 +3,7 @@ package com.bentbase.backend.user;
 import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.core.exception.generic.GetException;
 import com.bentbase.backend.core.exception.generic.UpdateException;
+import com.bentbase.backend.review.Review;
 import com.bentbase.backend.utils.PageUtil.Paginate;
 import com.bentbase.backend.utils.PatchUtil;
 import com.bentbase.backend.utils.SortUtil;
@@ -51,6 +52,26 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return user.get();
+	}
+	
+	@SneakyThrows
+	@Override
+	public Page<Review> getProvidedReviews(String email, Paginate paginate) {
+		userRepository.findByEmail(email);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Review.class));
+		return userRepository.getAllProvidedReviews(email, pagingSort);
+	}
+	
+	@SneakyThrows
+	@Override
+	public Page<Review> getReceivedReviews(String email, Paginate paginate) {
+		userRepository.findByEmail(email);
+		PageRequest pagingSort = PageRequest.of(paginate.getPage(),
+		                                        paginate.getSize(),
+		                                        SortUtil.getOrdersFromStringArray(paginate.getSorts(), Review.class));
+		return userRepository.getAllReceivedReviews(email, pagingSort);
 	}
 	
 	@SneakyThrows

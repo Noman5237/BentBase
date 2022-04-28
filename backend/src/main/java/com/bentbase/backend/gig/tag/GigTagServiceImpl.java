@@ -18,14 +18,6 @@ public class GigTagServiceImpl implements GigTagService {
 	}
 	
 	@Override
-	public Page<Gig> getGigsByTags(List<String> includingTagNames,
-	                               List<String> excludingTagNames,
-	                               PageUtil.Paginate paginate) {
-		
-		throw new NotYetImplementedException();
-	}
-	
-	@Override
 	public GigTag createGigTag(GigTag gigTag) {
 		return gigTagRepository.save(gigTag);
 	}
