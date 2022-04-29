@@ -23,7 +23,7 @@ public class Review {
 	
 	@Column
 	@NotNull
-	private float rating;
+	private Float rating;
 	
 	@Column
 	private String comments;

@@ -1,5 +1,6 @@
 package com.bentbase.backend.user;
 
+import com.bentbase.backend.core.exception.constraint.Message;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +22,7 @@ public class User implements Serializable {
 	
 	@Id
 	@Column (nullable = false)
-	@Email (message = "email address must be valid")
+	@Email (message = Message.EMAIL)
 	private String email;
 	
 	@Column

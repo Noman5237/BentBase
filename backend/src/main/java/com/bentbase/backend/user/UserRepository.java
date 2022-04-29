@@ -23,8 +23,8 @@ interface UserRepository extends JpaRepository<User, String>, JpaSpecificationEx
 	@Query ("select review from Review review where review.reviewer = :email")
 	Page<Review> getAllProvidedReviews(@Param ("email") String email, Pageable pageable);
 	
-	@Query ("select review from Review review inner join UserReview user_review on user_review.id.reviewId where user_review.id.userEmail = :email")
-	Page<Review> getAllReceivedReviews(@Param (":email") String email, Pageable pageable);
+	@Query ("select review from Review review inner join UserReview user_review on user_review.id.reviewId = review.id where user_review.id.userEmail = :email")
+	Page<Review> getAllReceivedReviews(@Param ("email") String email, Pageable pageable);
 	
 	@Transactional
 	void deleteByEmail(String email);

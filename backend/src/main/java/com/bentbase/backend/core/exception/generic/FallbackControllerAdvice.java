@@ -4,8 +4,10 @@ import com.bentbase.backend.core.dto.ExceptionResponse;
 import com.bentbase.backend.core.exception.RESTException;
 import com.bentbase.backend.core.exception.RESTExceptionControllerAdvice;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 
 import java.util.Arrays;
 
@@ -13,7 +15,8 @@ import java.util.Arrays;
 public class FallbackControllerAdvice extends RESTExceptionControllerAdvice {
 	
 	public FallbackControllerAdvice() {
-		Arrays.asList(FallbackExceptionHandlers.values()).forEach(handler -> super.handlers.add(handler.getExceptionHandler()));
+		Arrays.asList(FallbackExceptionHandlers.values())
+		      .forEach(handler -> super.handlers.add(handler.getExceptionHandler()));
 	}
 	
 	@Override

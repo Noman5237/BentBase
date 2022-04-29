@@ -2,6 +2,8 @@ package com.bentbase.backend.review;
 
 import org.springframework.data.domain.Page;
 
+import java.util.Map;
+
 import static com.bentbase.backend.utils.PageUtil.Paginate;
 
 public interface ReviewService {
@@ -12,7 +14,7 @@ public interface ReviewService {
 	
 	Review createReview(Review review);
 	
-	Review updateReview(Review review);
+	Review updateReview(Map<String, Object> properties);
 	
-	void deleteReviewById(String id);
+	void deleteReviewById(Long id);
 }

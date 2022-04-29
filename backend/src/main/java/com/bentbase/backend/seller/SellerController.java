@@ -3,8 +3,10 @@ package com.bentbase.backend.seller;
 import com.bentbase.backend.utils.PageUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.Map;
 
